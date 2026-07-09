@@ -98,7 +98,12 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
+// Render terminates TLS at the load balancer and forwards plain HTTP internally.
+// Forcing HTTPS redirection here would create a redirect loop in that environment.
+if (Environment.GetEnvironmentVariable("RENDER") != "true")
+{
+    app.UseHttpsRedirection();
+}
 app.UseCors("TravelPlatformCors");
 app.UseAuthentication();
 app.UseAuthorization();
