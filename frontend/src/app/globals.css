@@ -1,0 +1,501 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #C9A84C;
+  --color-gold-light: #D4B96A;
+  --color-gold-dark: #A8863A;
+  --color-gold-pale: #F5EDD6;
+  --color-navy: #1B2B4B;
+  --color-navy-light: #243660;
+  --color-navy-dark: #111B30;
+  --color-navy-muted: #2C3E5D;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+
+  --shadow-gold: 0 4px 20px rgba(201, 168, 76, 0.3);
+  --shadow-gold-lg: 0 8px 32px rgba(201, 168, 76, 0.4);
+
+  --animate-fade-up: fadeInUp 0.7s ease forwards;
+  --animate-pulse-ring: pulse-ring 2s ease-out infinite;
+  --animate-float: float 3s ease-in-out infinite;
+}
+
+/* ─── CSS Variables (used in plain CSS classes below) ──── */
+:root {
+  --gold: #C9A84C;
+  --gold-light: #D4B96A;
+  --gold-dark: #A8863A;
+  --gold-pale: #F5EDD6;
+  --navy: #1B2B4B;
+  --navy-light: #243660;
+  --navy-dark: #111B30;
+  --navy-muted: #2C3E5D;
+  --white: #FFFFFF;
+  --off-white: #F8F6F1;
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  --gray-800: #1F2937;
+  --gray-900: #111827;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-gold: 0 4px 20px rgb(201 168 76 / 0.3);
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--gray-800);
+  background: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── Typography ────────────────────────────────────────── */
+.font-serif { font-family: var(--font-serif); }
+.font-sans  { font-family: var(--font-sans); }
+
+:where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-serif);
+  line-height: 1.2;
+  color: var(--navy);
+}
+
+/* ─── Section Label ─────────────────────────────────────── */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.section-label::before,
+.section-label::after {
+  content: '';
+  flex: 0 0 40px;
+  height: 1.5px;
+  background: var(--gold);
+}
+
+.section-label-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.section-label-left::before {
+  content: '';
+  flex: 0 0 40px;
+  height: 1.5px;
+  background: var(--gold);
+}
+
+/* ─── Buttons ────────────────────────────────────────────── */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--gold);
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-gold:hover {
+  background: var(--gold-dark);
+  border-color: var(--gold-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  border: 2px solid rgba(255,255,255,0.6);
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-outline:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: var(--white);
+}
+
+.btn-outline-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--gold);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--gold);
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-outline-gold:hover {
+  background: var(--gold);
+  color: var(--white);
+}
+
+/* ─── Cards ─────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* ─── Tour Card ─────────────────────────────────────────── */
+.tour-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.tour-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgb(0 0 0 / 0.15);
+}
+
+.tour-card:hover .tour-card-img {
+  transform: scale(1.05);
+}
+
+.tour-card-img {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Animations ─────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+.animate-fade-up   { animation: fadeInUp 0.7s ease forwards; }
+.animate-fade-left { animation: fadeInLeft 0.7s ease forwards; }
+.animate-fade-right{ animation: fadeInRight 0.7s ease forwards; }
+.animate-float     { animation: float 3s ease-in-out infinite; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── WhatsApp Float ────────────────────────────────────── */
+.whatsapp-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-float::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #25D366;
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* ─── Navbar ─────────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: var(--transition);
+}
+
+.navbar-transparent {
+  background: transparent;
+}
+
+.navbar-solid {
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── Hero ───────────────────────────────────────────────── */
+.hero-overlay {
+  background: linear-gradient(
+    to right,
+    rgba(17, 27, 48, 0.92) 0%,
+    rgba(17, 27, 48, 0.75) 50%,
+    rgba(17, 27, 48, 0.2) 100%
+  );
+}
+
+/* ─── Section Spacing ────────────────────────────────────── */
+.section {
+  padding: 96px 0;
+}
+
+.section-sm {
+  padding: 64px 0;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ─── Star Rating ────────────────────────────────────────── */
+.stars {
+  display: flex;
+  gap: 2px;
+  color: var(--gold);
+}
+
+/* ─── Input Styles ───────────────────────────────────────── */
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--gray-800);
+  background: var(--white);
+  transition: var(--transition);
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+}
+
+.input::placeholder {
+  color: var(--gray-400);
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--gray-100); }
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 3px;
+}
+
+/* ─── Selection ─────────────────────────────────────────── */
+::selection {
+  background: var(--gold-pale);
+  color: var(--navy);
+}
+
+/* TipTap Rich Text Editor styles */
+.tiptap-editor-content .ProseMirror {
+  padding: 0.85rem 1rem;
+  min-height: 180px;
+  font-size: 0.875rem;
+  color: #1E293B;
+  line-height: 1.6;
+  outline: none;
+}
+.tiptap-editor-content .ProseMirror p { margin: 0 0 0.75rem; }
+.tiptap-editor-content .ProseMirror h1 {
+  font-family: var(--font-serif, serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1B2B4B;
+  margin: 1rem 0 0.5rem;
+}
+.tiptap-editor-content .ProseMirror h2 {
+  font-family: var(--font-serif, serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1B2B4B;
+  margin: 0.9rem 0 0.5rem;
+}
+.tiptap-editor-content .ProseMirror h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1B2B4B;
+  margin: 0.8rem 0 0.4rem;
+}
+.tiptap-editor-content .ProseMirror ul,
+.tiptap-editor-content .ProseMirror ol {
+  padding-left: 1.4rem;
+  margin: 0 0 0.75rem;
+}
+.tiptap-editor-content .ProseMirror li { margin-bottom: 0.3rem; }
+.tiptap-editor-content .ProseMirror blockquote {
+  border-left: 3px solid #C9A84C;
+  padding-left: 0.9rem;
+  color: #64748B;
+  font-style: italic;
+  margin: 0.75rem 0;
+}
+.tiptap-editor-content .ProseMirror a { color: #C9A84C; text-decoration: underline; }
+.tiptap-editor-content .ProseMirror img { max-width: 100%; border-radius: 8px; margin: 0.5rem 0; }
+.tiptap-editor-content .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #94A3B8;
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Public tour detail — rendered rich text description */
+.tour-full-description p { margin: 0 0 1rem; }
+.tour-full-description h1 {
+  font-family: var(--font-serif, serif);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--navy, #1B2B4B);
+  margin: 1.75rem 0 0.75rem;
+}
+.tour-full-description h2 {
+  font-family: var(--font-serif, serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--navy, #1B2B4B);
+  margin: 1.5rem 0 0.65rem;
+}
+.tour-full-description h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--navy, #1B2B4B);
+  margin: 1.25rem 0 0.5rem;
+}
+.tour-full-description ul,
+.tour-full-description ol {
+  padding-left: 1.5rem;
+  margin: 0 0 1rem;
+}
+.tour-full-description li { margin-bottom: 0.4rem; }
+.tour-full-description blockquote {
+  border-left: 3px solid var(--gold, #C9A84C);
+  padding-left: 1rem;
+  color: #64748B;
+  font-style: italic;
+  margin: 1rem 0;
+}
+.tour-full-description a { color: var(--gold, #C9A84C); text-decoration: underline; }
+.tour-full-description img { max-width: 100%; border-radius: 10px; margin: 0.75rem 0; }
