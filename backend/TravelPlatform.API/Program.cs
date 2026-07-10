@@ -50,6 +50,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 
 // ─── CORS ───────────────────────────────────────────────────
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("TravelPlatformCors", policy =>
@@ -60,8 +62,7 @@ builder.Services.AddCors(options =>
             .SetIsOriginAllowed(origin =>
             {
                 if (origin.Contains("localhost")) return true;
-                if (origin.Contains("yourdomain.com")) return true;
-                return false;
+                return allowedOrigins.Contains(origin, StringComparer.OrdinalIgnoreCase);
             });
     });
 });
