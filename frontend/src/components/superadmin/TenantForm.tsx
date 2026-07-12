@@ -44,6 +44,15 @@ const sections = [
   { id: 'users', label: 'Admin Users' },
 ] as const
 
+function generatePassword(): string {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%'
+  let pwd = ''
+  for (let i = 0; i < 14; i++) {
+    pwd += chars[Math.floor(Math.random() * chars.length)]
+  }
+  return pwd
+}
+
 export function initTenantForm(tenant?: any): TenantFormData {
   return {
     name: tenant?.name || '',
@@ -122,6 +131,7 @@ export default function TenantForm({ initial, tenantId }: { initial: TenantFormD
   const [form, setForm] = useState<TenantFormData>(initial)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+  const [created, setCreated] = useState<{ email: string; password: string; subdomain: string } | null>(null)
   const [activeSection, setActiveSection] = useState<string>('general')
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({})
 
@@ -228,13 +238,47 @@ export default function TenantForm({ initial, tenantId }: { initial: TenantFormD
           })
         }
 
-        router.push('/superadmin/dashboard')
+        setCreated({ email: form.adminEmail, password: form.adminPassword, subdomain: form.subdomain })
       }
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to save. Please check the fields and try again.')
     } finally {
       setSaving(false)
     }
+  }
+
+  if (created) {
+    return (
+      <div style={{ maxWidth: '520px', margin: '3rem auto', background: '#fff', borderRadius: '12px', padding: '2rem', boxShadow: '0 1px 3px rgba(27,43,75,0.08)' }}>
+        <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', fontWeight: 700, color: 'var(--navy, #1B2B4B)', marginBottom: '0.5rem' }}>
+          Travel Site Created
+        </h2>
+        <p style={{ color: '#6B7280', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
+          Save these admin login details now — the password will not be shown again.
+        </p>
+        <div style={{ background: '#F7F6F2', borderRadius: '8px', padding: '1rem', marginBottom: '1.5rem' }}>
+          <div style={{ marginBottom: '0.9rem' }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', marginBottom: '0.2rem' }}>Admin Panel URL</div>
+            <div style={{ fontSize: '0.9rem', fontFamily: 'monospace' }}>{`/${created.subdomain}/admin`}</div>
+          </div>
+          <div style={{ marginBottom: '0.9rem' }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', marginBottom: '0.2rem' }}>Email</div>
+            <div style={{ fontSize: '0.9rem', fontFamily: 'monospace' }}>{created.email}</div>
+          </div>
+          <div>
+            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', marginBottom: '0.2rem' }}>Password</div>
+            <div style={{ fontSize: '0.9rem', fontFamily: 'monospace' }}>{created.password}</div>
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={() => router.push('/superadmin/dashboard')}
+          style={{ padding: '0.65rem 1.5rem', border: 'none', borderRadius: '8px', background: 'var(--navy, #1B2B4B)', color: '#fff', fontWeight: 600, cursor: 'pointer', fontSize: '0.875rem' }}
+        >
+          Continue to Dashboard
+        </button>
+      </div>
+    )
   }
 
   const inputStyle = { width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem' }
@@ -452,7 +496,16 @@ export default function TenantForm({ initial, tenantId }: { initial: TenantFormD
             </div>
             <div>
               <label style={labelStyle}>Admin Password *</label>
-              <input type="password" value={form.adminPassword} onChange={(e) => update({ adminPassword: e.target.value })} required style={inputStyle} />
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <input value={form.adminPassword} onChange={(e) => update({ adminPassword: e.target.value })} required style={inputStyle} />
+                <button
+                  type="button"
+                  onClick={() => update({ adminPassword: generatePassword() })}
+                  style={{ padding: '0 0.9rem', border: '1px solid #CBD5E1', borderRadius: '8px', background: '#fff', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, whiteSpace: 'nowrap' }}
+                >
+                  Generate
+                </button>
+              </div>
             </div>
           </div>
         </SectionCard>
