@@ -2,6 +2,7 @@
 
 import { Phone } from 'lucide-react'
 import { useTenant } from '@/context/TenantContext'
+import { tenantUrl } from '@/lib/utils'
 import { getContentSection } from '@/lib/utils'
 
 export default function CTASection() {
@@ -38,7 +39,7 @@ export default function CTASection() {
         </p>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem', marginBottom: '2rem' }}>
-          <a href={section?.ctaUrl || '/contact'} className="btn-gold">
+          <a href={tenantUrl(tenant?.subdomain, section?.ctaUrl || '/contact')} className="btn-gold">
             {section?.ctaText || 'Plan Your Journey'}
           </a>
           {tenant?.phoneNumber && (

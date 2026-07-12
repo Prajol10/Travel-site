@@ -2,11 +2,12 @@
 
 import { Check, Calendar } from 'lucide-react'
 import { useTenant } from '@/context/TenantContext'
+import { tenantUrl } from '@/lib/utils'
 import { useCurrency } from '@/context/CurrencyContext'
 import { formatPrice } from '@/lib/utils'
 
 export default function FeaturedJourney() {
-  const { data } = useTenant()
+  const { data, tenant } = useTenant()
   const { currency } = useCurrency()
   const featured = data?.tours?.find((t) => t.isFeatured) || data?.tours?.[0]
 
@@ -47,7 +48,7 @@ export default function FeaturedJourney() {
             </div>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1.5rem' }}>
-              <a href={`/tours/${featured.slug}`} className="btn-gold">View Full Itinerary</a>
+              <a href={tenantUrl(tenant?.subdomain, `/tours/${featured.slug}`)} className="btn-gold">View Full Itinerary</a>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--gray-500)', fontSize: '0.875rem', fontWeight: 500 }}>
                 <Calendar size={15} color="var(--gold)" />
                 {featured.durationDays} Days / {featured.durationNights} Nights

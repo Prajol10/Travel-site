@@ -1,11 +1,13 @@
 'use client'
 
 import { useTenant } from '@/context/TenantContext'
-import { formatDate } from '@/lib/utils'
+import { useParams } from 'next/navigation'
+import { formatDate, tenantUrl } from '@/lib/utils'
 import { ArrowRight } from 'lucide-react'
 
 export default function BlogPage() {
   const { data } = useTenant()
+  const params = useParams()
   const posts = data?.blogs || []
 
   return (
@@ -31,7 +33,7 @@ export default function BlogPage() {
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.75rem' }}>
               {posts.map((post) => (
-                <a key={post.id} href={`/blog/${post.slug}`} className="card" style={{ display: 'block', textDecoration: 'none' }}>
+                <a key={post.id} href={tenantUrl(params.tenant as string, `/blog/${post.slug}`)} className="card" style={{ display: 'block', textDecoration: 'none' }}>
                   <div style={{ height: '220px', overflow: 'hidden' }}>
                     <img
                       src={post.coverImageUrl || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2070'}

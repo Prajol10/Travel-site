@@ -2,10 +2,11 @@
 
 import { Award, Leaf } from 'lucide-react'
 import { useTenant } from '@/context/TenantContext'
+import { tenantUrl } from '@/lib/utils'
 import { getContentSection } from '@/lib/utils'
 
 export default function AboutSection() {
-  const { data } = useTenant()
+  const { data, tenant } = useTenant()
   const section = getContentSection(data?.content || [], 'AboutUs')
   const gallery = data?.gallery?.slice(0, 4) || []
 
@@ -73,7 +74,7 @@ export default function AboutSection() {
               </div>
             </div>
 
-            <a href={section?.ctaUrl || '/about'} className="btn-gold">
+            <a href={tenantUrl(tenant?.subdomain, section?.ctaUrl || '/about')} className="btn-gold">
               {section?.ctaText || 'Learn More About Us'}
             </a>
           </div>

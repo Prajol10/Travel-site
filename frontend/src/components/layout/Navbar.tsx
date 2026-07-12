@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Menu, X, ChevronDown, Search, Phone } from 'lucide-react'
 import { useTenant } from '@/context/TenantContext'
+import { tenantUrl } from '@/lib/utils'
 import CurrencySwitcher from './CurrencySwitcher'
 
 const NAV_LINKS = [
@@ -63,7 +64,7 @@ export default function Navbar() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '72px' }}>
 
           {/* Logo */}
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', zIndex: 10 }}>
+          <Link href={tenantUrl(tenant?.subdomain, '/')} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', zIndex: 10 }}>
             <div style={{
               width: '42px', height: '42px', borderRadius: '50%',
               background: isSolid ? 'var(--navy)' : 'rgba(255,255,255,0.15)',
@@ -97,7 +98,7 @@ export default function Navbar() {
                 onMouseLeave={() => setDropdownOpen(null)}
               >
                 <Link
-                  href={link.href}
+                  href={tenantUrl(tenant?.subdomain, link.href)}
                   style={{
                     display: 'flex', alignItems: 'center', gap: '4px',
                     padding: '8px 14px', fontSize: '0.875rem', fontWeight: 500,
@@ -120,7 +121,7 @@ export default function Navbar() {
                     {link.dropdownItems.map((item) => (
                       <Link
                         key={item.label}
-                        href={item.href}
+                        href={tenantUrl(tenant?.subdomain, item.href)}
                         style={{
                           display: 'block', padding: '10px 16px', fontSize: '0.875rem',
                           color: 'var(--gray-700)', textDecoration: 'none', borderRadius: '8px',
@@ -192,7 +193,7 @@ export default function Navbar() {
           {NAV_LINKS.map((link) => (
             <Link
               key={link.label}
-              href={link.href}
+              href={tenantUrl(tenant?.subdomain, link.href)}
               style={{ display: 'block', padding: '12px 0', color: 'var(--gray-700)', fontWeight: 500, textDecoration: 'none', borderBottom: '1px solid var(--gray-50)' }}
               onClick={() => setMobileOpen(false)}
             >

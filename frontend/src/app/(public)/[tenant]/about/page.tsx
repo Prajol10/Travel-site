@@ -1,7 +1,7 @@
 'use client'
 
 import { useTenant } from '@/context/TenantContext'
-import { getContentSection } from '@/lib/utils'
+import { getContentSection, tenantUrl } from '@/lib/utils'
 import { Award, Leaf, Users, Shield } from 'lucide-react'
 
 export default function AboutPage() {
@@ -60,7 +60,7 @@ export default function AboutPage() {
                   </div>
                 </div>
               </div>
-              <a href="/contact" className="btn-gold">{section?.ctaText || 'Get In Touch'}</a>
+              <a href={tenantUrl(tenant?.subdomain, '/contact')} className="btn-gold">{section?.ctaText || 'Get In Touch'}</a>
             </div>
           </div>
         </div>

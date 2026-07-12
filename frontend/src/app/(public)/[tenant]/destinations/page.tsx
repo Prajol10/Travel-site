@@ -1,6 +1,8 @@
 'use client'
 
 import { useTenant } from '@/context/TenantContext'
+import { useParams } from 'next/navigation'
+import { tenantUrl } from '@/lib/utils'
 
 const DESTINATIONS = [
   { name: 'Mount Kailash', country: 'Tibet', description: 'Sacred mountain revered by four religions', image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=2070' },
@@ -12,6 +14,8 @@ const DESTINATIONS = [
 ]
 
 export default function DestinationsPage() {
+  const params = useParams()
+  const tenantSlug = params.tenant as string
   return (
     <>
       <div style={{ background: 'var(--navy)', padding: '120px 0 60px' }}>
@@ -30,7 +34,7 @@ export default function DestinationsPage() {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.75rem' }}>
             {DESTINATIONS.map((dest) => (
-              <a key={dest.name} href="/tours" className="tour-card" style={{ display: 'block', textDecoration: 'none' }}>
+              <a key={dest.name} href={tenantUrl(tenantSlug, '/tours')} className="tour-card" style={{ display: 'block', textDecoration: 'none' }}>
                 <div style={{ height: '240px', overflow: 'hidden', position: 'relative' }}>
                   <img
                     src={dest.image}

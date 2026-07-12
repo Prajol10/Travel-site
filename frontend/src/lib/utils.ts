@@ -53,3 +53,19 @@ export function getSubdomain(): string {
   if (parts.length >= 3) return parts[0]
   return 'demo'
 }
+
+/**
+ * Builds a tenant-prefixed internal URL, e.g. tenantUrl('prajol', '/tours') -> '/prajol/tours'
+ * Leaves external links (http, tel:, mailto:, #anchors) untouched.
+ * Falls back to the raw path if no tenant slug is available yet.
+ */
+export function tenantUrl(tenantSlug: string | undefined | null, path: string): string {
+  if (!path) return path
+  if (path.startsWith('http') || path.startsWith('tel:') || path.startsWith('mailto:') || path.startsWith('#')) {
+    return path
+  }
+  if (!tenantSlug) return path
+
+  const cleanPath = path.startsWith('/') ? path : `/${path}`
+  return `/${tenantSlug}${cleanPath}`
+}

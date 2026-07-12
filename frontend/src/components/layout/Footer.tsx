@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Send, MapPin, Phone, Mail } from 'lucide-react'
 import { useTenant } from '@/context/TenantContext'
+import { tenantUrl } from '@/lib/utils'
 
 export default function Footer() {
   const { tenant, data } = useTenant()
@@ -81,7 +82,7 @@ export default function Footer() {
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {topTours.length > 0 ? topTours.map((tour) => (
                 <li key={tour.id}>
-                  <Link href={`/tours/${tour.slug}`} style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.875rem', textDecoration: 'none' }}>
+                  <Link href={tenantUrl(tenant?.subdomain, `/tours/${tour.slug}`)} style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.875rem', textDecoration: 'none' }}>
                     › {tour.title}
                   </Link>
                 </li>
@@ -162,8 +163,8 @@ export default function Footer() {
         }}>
           <p>© {new Date().getFullYear()} {tenant?.name || 'Travel Platform'}. All rights reserved.</p>
           <div style={{ display: 'flex', gap: '1.25rem' }}>
-            <Link href="/privacy" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Privacy Policy</Link>
-            <Link href="/terms" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Terms of Service</Link>
+            <Link href={tenantUrl(tenant?.subdomain, '/privacy')} style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Privacy Policy</Link>
+            <Link href={tenantUrl(tenant?.subdomain, '/terms')} style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Terms of Service</Link>
           </div>
         </div>
       </div>

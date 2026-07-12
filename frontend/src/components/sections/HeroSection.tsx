@@ -3,10 +3,11 @@
 import { useEffect, useState } from 'react'
 import { PlayCircle } from 'lucide-react'
 import { useTenant } from '@/context/TenantContext'
+import { tenantUrl } from '@/lib/utils'
 import { getContentSection } from '@/lib/utils'
 
 export default function HeroSection() {
-  const { data } = useTenant()
+  const { data, tenant } = useTenant()
   const hero = getContentSection(data?.content || [], 'Hero')
   const stats = data?.stats || []
   const galleryPreview = data?.gallery?.slice(0, 3) || []
@@ -78,7 +79,7 @@ export default function HeroSection() {
               transition: 'opacity 0.7s ease 0.3s',
             }}
           >
-            <a href={hero?.ctaUrl || '/tours'} className="btn-gold">
+            <a href={tenantUrl(tenant?.subdomain, hero?.ctaUrl || '/tours')} className="btn-gold">
               {hero?.ctaText || 'Explore Now'}
             </a>
             <a href={hero?.secondaryCtaUrl || '#'} className="btn-outline">

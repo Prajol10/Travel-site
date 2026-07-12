@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { useTenant } from '@/context/TenantContext'
+import { tenantUrl } from '@/lib/utils'
 import { useCurrency } from '@/context/CurrencyContext'
 import { formatPrice } from '@/lib/utils'
 import api from '@/lib/api'
@@ -524,7 +525,7 @@ export default function TourDetailPage() {
             <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--navy)', marginBottom: '1.5rem' }}>Similar Trips</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '1.5rem' }}>
               {similar.map((s) => (
-                <a key={s.id} href={`/tours/${s.slug}`} style={{ display: 'block', textDecoration: 'none' }}>
+                <a key={s.id} href={tenantUrl(params.tenant as string, `/tours/${s.slug}`)} style={{ display: 'block', textDecoration: 'none' }}>
                   <div style={{ height: '160px', borderRadius: '10px', overflow: 'hidden', marginBottom: '0.6rem' }}>
                     <img src={s.coverImageUrl || 'https://images.unsplash.com/photo-1486911278844-a81c5267e227?q=80&w=2070&auto=format&fit=crop'} alt={s.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>

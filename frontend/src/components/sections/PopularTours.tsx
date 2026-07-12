@@ -2,6 +2,7 @@
 
 import { Clock, MapPin } from 'lucide-react'
 import { useTenant } from '@/context/TenantContext'
+import { tenantUrl } from '@/lib/utils'
 import { useCurrency } from '@/context/CurrencyContext'
 import { formatPrice } from '@/lib/utils'
 
@@ -25,7 +26,7 @@ export default function PopularTours() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
           {tours.map((tour) => (
-            <a key={tour.id} href={`/tours/${tour.slug}`} className="tour-card block">
+            <a key={tour.id} href={tenantUrl(tenant?.subdomain, `/tours/${tour.slug}`)} className="tour-card block">
               <div className="relative h-56 overflow-hidden">
                 <img
                   src={tour.coverImageUrl || 'https://images.unsplash.com/photo-1486911278844-a81c5267e227?q=80&w=2070&auto=format&fit=crop'}
@@ -61,7 +62,7 @@ export default function PopularTours() {
         </div>
 
         <div className="text-center mt-14">
-          <a href="/tours" className="btn-outline-gold">
+          <a href={tenantUrl(tenant?.subdomain, '/tours')} className="btn-outline-gold">
             View All Tour Packages
           </a>
         </div>

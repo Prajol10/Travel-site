@@ -2,10 +2,11 @@
 
 import { ArrowRight } from 'lucide-react'
 import { useTenant } from '@/context/TenantContext'
+import { tenantUrl } from '@/lib/utils'
 import { formatDate } from '@/lib/utils'
 
 export default function BlogSection() {
-  const { data } = useTenant()
+  const { data, tenant } = useTenant()
   const posts = data?.blogs?.slice(0, 3) || []
 
   if (posts.length === 0) return null
@@ -23,7 +24,7 @@ export default function BlogSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
           {posts.map((post) => (
-            <a key={post.id} href={`/blog/${post.slug}`} className="card block">
+            <a key={post.id} href={tenantUrl(tenant?.subdomain, `/blog/${post.slug}`)} className="card block">
               <div className="h-52 overflow-hidden">
                 <img
                   src={post.coverImageUrl || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2070&auto=format&fit=crop'}
@@ -52,7 +53,7 @@ export default function BlogSection() {
         </div>
 
         <div className="text-center mt-14">
-          <a href="/blog" className="btn-outline-gold">
+          <a href={tenantUrl(tenant?.subdomain, '/blog')} className="btn-outline-gold">
             View All Articles
           </a>
         </div>

@@ -5,13 +5,16 @@ import { useTenant } from '@/context/TenantContext'
 import { useCurrency } from '@/context/CurrencyContext'
 import { formatPrice } from '@/lib/utils'
 import { Clock, MapPin } from 'lucide-react'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useSearchParams, useRouter, useParams } from 'next/navigation'
+import { tenantUrl } from '@/lib/utils'
 
 function ToursContent() {
   const { data } = useTenant()
   const { currency } = useCurrency()
   const searchParams = useSearchParams()
   const router = useRouter()
+  const params = useParams()
+  const tenantSlug = params.tenant as string
 
   const allTours = data?.tours || []
   const featuredOnly = searchParams.get('featured') === 'true'
@@ -22,9 +25,9 @@ function ToursContent() {
 
   function goToFilter(featured: boolean) {
     if (featured) {
-      router.push('/tours?featured=true')
+      router.push(tenantUrl(tenantSlug, '/tours?featured=true'))
     } else {
-      router.push('/tours')
+      router.push(tenantUrl(tenantSlug, '/tours'))
     }
   }
 
@@ -86,7 +89,7 @@ function ToursContent() {
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.75rem' }}>
               {tours.map((tour) => (
-                <a key={tour.id} href={`/tours/${tour.slug}`} className="tour-card" style={{ display: 'block', textDecoration: 'none' }}>
+                <a key={tour.id} href={tenantUrl(tenantSlug, `/tours/${tour.slug}`)} className="tour-card" style={{ display: 'block', textDecoration: 'none' }}>
                   <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
                     <img
                       src={tour.coverImageUrl || 'https://images.unsplash.com/photo-1486911278844-a81c5267e227?q=80&w=2070&auto=format&fit=crop'}
