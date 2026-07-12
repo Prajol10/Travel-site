@@ -40,7 +40,7 @@ export default function PopularTours() {
                 </div>
               </div>
 
-              <div className="p-5">
+              <div className="p-5 pr-6">
                 <h3 className="font-serif font-bold text-lg text-navy mb-3 leading-snug line-clamp-2">
                   {tour.title}
                 </h3>
