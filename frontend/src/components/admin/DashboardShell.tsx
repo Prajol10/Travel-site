@@ -4,6 +4,7 @@ import { ReactNode, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
 import { getUser, clearAuth, isAuthenticated } from '@/lib/auth'
+import api from '@/lib/api'
 
 interface NavGroup {
   label: string
@@ -15,11 +16,13 @@ export default function DashboardShell({
   navGroups,
   requiredRole,
   title,
+  tenantSlug,
 }: {
   children: ReactNode
   navGroups: NavGroup[]
   requiredRole: 'TenantAdmin' | 'SuperAdmin'
   title: string
+  tenantSlug?: string
 }) {
   const router = useRouter()
   const pathname = usePathname()
@@ -39,8 +42,23 @@ export default function DashboardShell({
       router.replace('/login')
       return
     }
+    if (requiredRole === 'TenantAdmin' && tenantSlug) {
+      api.get('/api/tenant/me')
+        .then((res) => {
+          const actualSlug = res.data.data.subdomain
+          if (actualSlug && actualSlug !== tenantSlug) {
+            router.replace(`/${actualSlug}/admin/dashboard`)
+          } else {
+            setChecked(true)
+          }
+        })
+        .catch(() => {
+          router.replace('/login')
+        })
+      return
+    }
     setChecked(true)
-  }, [router, requiredRole])
+  }, [router, requiredRole, tenantSlug])
 
   function handleLogout() {
     clearAuth()

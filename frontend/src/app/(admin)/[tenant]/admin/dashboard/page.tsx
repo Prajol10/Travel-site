@@ -2,23 +2,25 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import api from '@/lib/api'
 import { getUser } from '@/lib/auth'
 import { TourListDto } from '@/types'
 
-const sections = [
-  { label: 'Hero Section', desc: 'Edit homepage hero banner, title & CTA', href: '/admin/content/hero' },
-  { label: 'About Section', desc: 'Edit the about-us content block', href: '/admin/content/about' },
-  { label: 'Why Choose Us', desc: 'Edit the why-choose-us content block', href: '/admin/content/whychooseus' },
-  { label: 'Tours', desc: 'Add, edit or remove tour packages', href: '/admin/tours' },
-  { label: 'Blog', desc: 'Write and publish blog posts', href: '/admin/blog' },
-  { label: 'Gallery', desc: 'Manage photo & video gallery', href: '/admin/gallery' },
-  { label: 'Team', desc: 'Manage team members shown on site', href: '/admin/team' },
-  { label: 'Leads', desc: 'View and manage customer enquiries', href: '/admin/leads' },
-  { label: 'Settings', desc: 'Branding, contact info & socials', href: '/admin/settings' },
-]
-
 export default function AdminDashboard() {
+  const params = useParams()
+  const tenant = params.tenant as string
+  const sections = [
+    { label: 'Hero Section', desc: 'Edit homepage hero banner, title & CTA', href: `/${tenant}/admin/content/hero` },
+    { label: 'About Section', desc: 'Edit the about-us content block', href: `/${tenant}/admin/content/about` },
+    { label: 'Why Choose Us', desc: 'Edit the why-choose-us content block', href: `/${tenant}/admin/content/whychooseus` },
+    { label: 'Tours', desc: 'Add, edit or remove tour packages', href: `/${tenant}/admin/tours` },
+    { label: 'Blog', desc: 'Write and publish blog posts', href: `/${tenant}/admin/blog` },
+    { label: 'Gallery', desc: 'Manage photo & video gallery', href: `/${tenant}/admin/gallery` },
+    { label: 'Team', desc: 'Manage team members shown on site', href: `/${tenant}/admin/team` },
+    { label: 'Leads', desc: 'View and manage customer enquiries', href: `/${tenant}/admin/leads` },
+    { label: 'Settings', desc: 'Branding, contact info & socials', href: `/${tenant}/admin/settings` },
+  ]
   const [tours, setTours] = useState<TourListDto[]>([])
   const [loading, setLoading] = useState(true)
   const [leadCount, setLeadCount] = useState<number | null>(null)

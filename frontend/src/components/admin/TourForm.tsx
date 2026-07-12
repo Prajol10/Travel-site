@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import api from '@/lib/api'
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import RichTextEditor from './RichTextEditor'
 import ImageUpload from './ImageUpload'
 import GoogleSearchPreview from './GoogleSearchPreview'
@@ -202,6 +202,8 @@ function SectionCard({
 
 export default function TourForm({ initial, tourId }: { initial: TourFormData; tourId?: string }) {
   const router = useRouter()
+  const params = useParams()
+  const tenant = params.tenant as string
   const [form, setForm] = useState<TourFormData>(initial)
   const [saving, setSaving] = useState(false)
   const [tenantSubdomain, setTenantSubdomain] = useState('')
@@ -280,7 +282,7 @@ export default function TourForm({ initial, tourId }: { initial: TourFormData; t
       } else {
         await api.post('/api/tours', payload)
       }
-      router.push('/admin/tours')
+      router.push(`/${tenant}/admin/tours`)
     } finally {
       setSaving(false)
     }
@@ -583,7 +585,7 @@ export default function TourForm({ initial, tourId }: { initial: TourFormData; t
       >
         <button
           type="button"
-          onClick={() => router.push('/admin/tours')}
+          onClick={() => router.push(`/${tenant}/admin/tours`)}
           style={{ padding: '0.65rem 1.25rem', border: '1px solid #CBD5E1', borderRadius: '8px', background: '#fff', cursor: 'pointer', fontSize: '0.875rem' }}
         >
           Cancel

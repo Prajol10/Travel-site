@@ -2,11 +2,14 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import api from '@/lib/api'
 import { getUser } from '@/lib/auth'
 import { TourListDto } from '@/types'
 
 export default function AdminToursPage() {
+  const params = useParams()
+  const tenant = params.tenant as string
   const [tours, setTours] = useState<TourListDto[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -36,7 +39,7 @@ export default function AdminToursPage() {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--navy, #1B2B4B)' }}>Tours</h1>
-        <Link href="/admin/tours/new" style={{ padding: '0.6rem 1.1rem', background: 'var(--navy, #1B2B4B)', color: '#fff', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, textDecoration: 'none' }}>
+        <Link href={`/${tenant}/admin/tours/new`} style={{ padding: '0.6rem 1.1rem', background: 'var(--navy, #1B2B4B)', color: '#fff', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, textDecoration: 'none' }}>
           + New Tour
         </Link>
       </div>
@@ -65,7 +68,7 @@ export default function AdminToursPage() {
                   <td style={{ padding: '0.75rem 1rem', color: '#334155' }}>${t.priceUSD}</td>
                   <td style={{ padding: '0.75rem 1rem' }}>{t.isFeatured ? 'Yes' : 'No'}</td>
                   <td style={{ padding: '0.75rem 1rem', textAlign: 'right' }}>
-                    <Link href={`/admin/tours/${t.id}/edit`} style={{ marginRight: '0.5rem', padding: '0.35rem 0.7rem', fontSize: '0.8rem', border: '1px solid #CBD5E1', borderRadius: '6px', background: '#fff', textDecoration: 'none', color: '#334155' }}>Edit</Link>
+                    <Link href={`/${tenant}/admin/tours/${t.id}/edit`} style={{ marginRight: '0.5rem', padding: '0.35rem 0.7rem', fontSize: '0.8rem', border: '1px solid #CBD5E1', borderRadius: '6px', background: '#fff', textDecoration: 'none', color: '#334155' }}>Edit</Link>
                     <button onClick={() => handleDelete(t.id)} style={{ padding: '0.35rem 0.7rem', fontSize: '0.8rem', border: '1px solid #FCA5A5', color: '#B91C1C', borderRadius: '6px', background: '#fff', cursor: 'pointer' }}>Delete</button>
                   </td>
                 </tr>

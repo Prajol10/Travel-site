@@ -23,7 +23,13 @@ export default function LoginPage() {
       const res = await api.post('/api/auth/login', { email, password })
       const auth: AuthResponse = res.data.data
       saveAuth(auth)
-      router.push(auth.role === 'SuperAdmin' ? '/superadmin/dashboard' : '/admin/dashboard')
+      if (auth.role === 'SuperAdmin') {
+        router.push('/superadmin/dashboard')
+      } else {
+        const tenantRes = await api.get('/api/tenant/me')
+        const subdomain = tenantRes.data.data.subdomain
+        router.push(`/${subdomain}/admin/dashboard`)
+      }
     } catch (err: any) {
       setError(err?.response?.data?.message || 'Invalid email or password')
     } finally {
