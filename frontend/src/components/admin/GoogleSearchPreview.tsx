@@ -1,12 +1,11 @@
 'use client'
 
-import { getSubdomain } from '@/lib/utils'
-
 interface GoogleSearchPreviewProps {
   seoTitle: string
   seoDescription: string
   slug: string
   fallbackTitle?: string
+  subdomain: string
 }
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
@@ -16,14 +15,14 @@ export default function GoogleSearchPreview({
   seoDescription,
   slug,
   fallbackTitle = '',
+  subdomain,
 }: GoogleSearchPreviewProps) {
   const displayTitle = seoTitle || fallbackTitle || 'Untitled Tour'
   const displayDescription =
     seoDescription || 'Add an SEO description to control how this tour appears in search results.'
 
-  const subdomain = getSubdomain()
   const cleanUrl = SITE_URL.replace(/^https?:\/\//, '')
-  const displayUrl = `${subdomain}.${cleanUrl}/tours/${slug || 'tour-slug'}`
+  const displayUrl = `${cleanUrl}/${subdomain || 'tenant'}/tours/${slug || 'tour-slug'}`
 
   return (
     <div

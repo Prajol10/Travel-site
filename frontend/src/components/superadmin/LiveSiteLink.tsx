@@ -23,7 +23,7 @@ const linkStyle = {
 export default function LiveSiteLink({ subdomain }: LiveSiteLinkProps) {
   const cleanUrl = SITE_URL.replace(/^https?:\/\//, '')
   const protocol = SITE_URL.startsWith('https') ? 'https' : 'http'
-  const href = protocol + '://' + subdomain + '.' + cleanUrl
+  const href = protocol + '://' + cleanUrl + '/' + subdomain
 
   return React.createElement(
     'a',

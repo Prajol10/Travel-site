@@ -204,6 +204,7 @@ export default function TourForm({ initial, tourId }: { initial: TourFormData; t
   const router = useRouter()
   const [form, setForm] = useState<TourFormData>(initial)
   const [saving, setSaving] = useState(false)
+  const [tenantSubdomain, setTenantSubdomain] = useState('')
   const [activeSection, setActiveSection] = useState<string>('general')
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({})
 
@@ -230,6 +231,11 @@ export default function TourForm({ initial, tourId }: { initial: TourFormData; t
     })
 
     return () => observer.disconnect()
+  }, [])
+  useEffect(() => {
+    api.get('/api/tenant/me')
+      .then((res) => setTenantSubdomain(res.data.data.subdomain))
+      .catch(() => {})
   }, [])
 
   function scrollToSection(id: string) {
@@ -548,6 +554,7 @@ export default function TourForm({ initial, tourId }: { initial: TourFormData; t
             seoDescription={form.seoDescription}
             slug={form.slug}
             fallbackTitle={form.title}
+            subdomain={tenantSubdomain}
           />
         </div>
         <div style={{ marginBottom: '1rem' }}>
