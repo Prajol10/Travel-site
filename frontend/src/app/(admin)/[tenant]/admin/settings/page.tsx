@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import api from '@/lib/api'
+import { getUser } from '@/lib/auth'
+import ImageUpload from '@/components/admin/ImageUpload'
 
 const emptyForm = {
   name: '',
@@ -50,8 +52,6 @@ export default function SettingsPage() {
   const fields = [
     { key: 'name', label: 'Agency Name' },
     { key: 'tagLine', label: 'Tagline' },
-    { key: 'logoUrl', label: 'Logo URL' },
-    { key: 'faviconUrl', label: 'Favicon URL' },
     { key: 'primaryColor', label: 'Primary Color' },
     { key: 'secondaryColor', label: 'Secondary Color' },
     { key: 'phoneNumber', label: 'Phone Number' },
@@ -70,6 +70,26 @@ export default function SettingsPage() {
       <h1 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#0F172A', marginBottom: '1.5rem' }}>Settings</h1>
 
       <form onSubmit={handleSubmit} style={{ background: '#fff', padding: '1.5rem', borderRadius: '10px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
+        <div style={{ marginBottom: '0.85rem' }}>
+          <ImageUpload
+            label="Logo"
+            value={form.logoUrl || ''}
+            onChange={(url) => setForm({ ...form, logoUrl: url })}
+            folder="branding/logo"
+            recommendedSize="512 x 512"
+            tenantId={getUser()?.tenantId}
+          />
+        </div>
+        <div style={{ marginBottom: '0.85rem' }}>
+          <ImageUpload
+            label="Favicon"
+            value={form.faviconUrl || ''}
+            onChange={(url) => setForm({ ...form, faviconUrl: url })}
+            folder="branding/favicon"
+            recommendedSize="64 x 64"
+            tenantId={getUser()?.tenantId}
+          />
+        </div>
         {fields.map((f) => (
           <div key={f.key} style={{ marginBottom: '0.85rem' }}>
             <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>{f.label}</label>

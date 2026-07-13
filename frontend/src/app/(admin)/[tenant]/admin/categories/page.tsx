@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import api from '@/lib/api'
 import { getUser } from '@/lib/auth'
 import RichTextEditor from '@/components/admin/RichTextEditor'
+import ImageUpload from '@/components/admin/ImageUpload'
 
 interface Category {
   id: string
@@ -153,9 +154,13 @@ export default function CategoriesPage() {
             </div>
 
             <div style={{ marginBottom: '0.85rem' }}>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Icon URL</label>
-              <input value={form.iconUrl} onChange={(e) => setForm({ ...form, iconUrl: e.target.value })}
-                style={{ width: '100%', padding: '0.5rem 0.65rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem' }} />
+              <ImageUpload
+                label="Icon"
+                value={form.iconUrl}
+                onChange={(url) => setForm({ ...form, iconUrl: url })}
+                folder="categories"
+                recommendedSize="128 x 128"
+              />
             </div>
 
             <div style={{ marginBottom: '1rem' }}>

@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import api from '@/lib/api'
 import { getUser } from '@/lib/auth'
 import RichTextEditor from '@/components/admin/RichTextEditor'
+import ImageUpload from '@/components/admin/ImageUpload'
 
 const typeMap: Record<string, string> = {
   hero: 'Hero',
@@ -70,7 +71,6 @@ export default function ContentEditorPage() {
           { key: 'title', label: 'Title' },
           { key: 'subtitle', label: 'Subtitle' },
           { key: 'body', label: 'Body', textarea: true },
-          { key: 'imageUrl', label: 'Image URL' },
           { key: 'ctaText', label: 'CTA Text' },
           { key: 'ctaUrl', label: 'CTA URL' },
           { key: 'secondaryCtaText', label: 'Secondary CTA Text' },
@@ -93,6 +93,16 @@ export default function ContentEditorPage() {
             )}
           </div>
         ))}
+
+        <div style={{ marginBottom: '0.85rem' }}>
+          <ImageUpload
+            label="Image"
+            value={form.imageUrl}
+            onChange={(url) => setForm({ ...form, imageUrl: url })}
+            folder={`content/${sectionType.toLowerCase()}`}
+            recommendedSize="1600 x 1067"
+          />
+        </div>
 
         <button type="submit" disabled={saving} style={{ padding: '0.6rem 1.2rem', border: 'none', borderRadius: '8px', background: '#0F172A', color: '#fff', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.7 : 1 }}>
           {saving ? 'Saving...' : 'Save'}

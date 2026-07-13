@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import api from '@/lib/api'
 import { getUser } from '@/lib/auth'
 import RichTextEditor from '@/components/admin/RichTextEditor'
+import ImageUpload from '@/components/admin/ImageUpload'
 
 interface BlogPost {
   id: string
@@ -133,9 +134,13 @@ export default function BlogAdminPage() {
             </div>
 
             <div style={{ marginBottom: '0.85rem' }}>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Cover Image URL</label>
-              <input value={form.coverImageUrl} onChange={(e) => setForm({ ...form, coverImageUrl: e.target.value })}
-                style={{ width: '100%', padding: '0.5rem 0.65rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem' }} />
+              <ImageUpload
+                label="Cover Image"
+                value={form.coverImageUrl}
+                onChange={(url) => setForm({ ...form, coverImageUrl: url })}
+                folder="blog"
+                recommendedSize="1200 x 630"
+              />
             </div>
 
             <div style={{ marginBottom: '0.85rem' }}>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import api from '@/lib/api'
 import { getUser } from '@/lib/auth'
+import ImageUpload from '@/components/admin/ImageUpload'
 
 interface GalleryItem {
   id: string
@@ -83,9 +84,13 @@ export default function GalleryPage() {
             <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem', color: '#0F172A' }}>Add Image</h2>
 
             <div style={{ marginBottom: '0.85rem' }}>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Image URL</label>
-              <input required value={form.url} onChange={(e) => setForm({ ...form, url: e.target.value })}
-                style={{ width: '100%', padding: '0.5rem 0.65rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem' }} />
+              <ImageUpload
+                label="Image"
+                value={form.url}
+                onChange={(url) => setForm({ ...form, url })}
+                folder="gallery"
+                recommendedSize="1600 x 1067"
+              />
             </div>
 
             <div style={{ marginBottom: '0.85rem' }}>

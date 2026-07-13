@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import api from '@/lib/api'
 import { getUser } from '@/lib/auth'
+import ImageUpload from '@/components/admin/ImageUpload'
 
 interface TeamMember {
   id: string
@@ -91,7 +92,6 @@ export default function TeamPage() {
               { key: 'region', label: 'Region' },
               { key: 'phoneNumber', label: 'Phone Number' },
               { key: 'email', label: 'Email' },
-              { key: 'photoUrl', label: 'Photo URL' },
             ].map((f) => (
               <div key={f.key} style={{ marginBottom: '0.85rem' }}>
                 <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>{f.label}</label>
@@ -103,6 +103,16 @@ export default function TeamPage() {
                 />
               </div>
             ))}
+
+            <div style={{ marginBottom: '0.85rem' }}>
+              <ImageUpload
+                label="Photo"
+                value={form.photoUrl}
+                onChange={(url) => setForm({ ...form, photoUrl: url })}
+                folder="team"
+                recommendedSize="400 x 400"
+              />
+            </div>
             <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
               <button type="button" onClick={() => setShowForm(false)} style={{ flex: 1, padding: '0.6rem', border: '1px solid #CBD5E1', borderRadius: '8px', background: '#fff', cursor: 'pointer' }}>Cancel</button>
               <button type="submit" style={{ flex: 1, padding: '0.6rem', border: 'none', borderRadius: '8px', background: '#0F172A', color: '#fff', fontWeight: 600, cursor: 'pointer' }}>Add</button>
