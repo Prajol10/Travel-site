@@ -132,20 +132,19 @@ export default function CategoriesPage() {
       </div>
 
       {showForm && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }}>
-          <form onSubmit={handleSubmit} style={{ background: '#fff', borderRadius: '10px', padding: '1.75rem', width: '400px' }}>
-            <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--navy, #1B2B4B)' }}>
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50, padding: '2rem 1rem' }}>
+          <form onSubmit={handleSubmit} className="admin-card" style={{ width: '520px', maxWidth: '100%', maxHeight: '90vh', overflowY: 'auto' }}>
+            <div className="admin-card-title">
               {editingId ? 'Edit Category' : 'New Category'}
-            </h2>
-
-            <div style={{ marginBottom: '0.85rem' }}>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Name</label>
-              <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
-                style={{ width: '100%', padding: '0.5rem 0.65rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem' }} />
             </div>
 
-            <div style={{ marginBottom: '0.85rem' }}>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Description</label>
+            <div className="admin-field">
+              <label className="admin-label">Name</label>
+              <input required className="admin-input" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+            </div>
+
+            <div className="admin-field">
+              <label className="admin-label">Description</label>
               <RichTextEditor
                 value={form.description}
                 onChange={(html) => setForm({ ...form, description: html })}
@@ -153,7 +152,7 @@ export default function CategoriesPage() {
               />
             </div>
 
-            <div style={{ marginBottom: '0.85rem' }}>
+            <div className="admin-field">
               <ImageUpload
                 label="Icon"
                 value={form.iconUrl}
@@ -163,15 +162,14 @@ export default function CategoriesPage() {
               />
             </div>
 
-            <div style={{ marginBottom: '1rem' }}>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Sort Order</label>
-              <input type="number" value={form.sortOrder} onChange={(e) => setForm({ ...form, sortOrder: Number(e.target.value) })}
-                style={{ width: '100%', padding: '0.5rem 0.65rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem' }} />
+            <div className="admin-field">
+              <label className="admin-label">Sort Order</label>
+              <input type="number" className="admin-input" value={form.sortOrder} onChange={(e) => setForm({ ...form, sortOrder: Number(e.target.value) })} />
             </div>
 
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <button type="button" onClick={() => setShowForm(false)} style={{ flex: 1, padding: '0.6rem', border: '1px solid #CBD5E1', borderRadius: '8px', background: '#fff', cursor: 'pointer' }}>Cancel</button>
-              <button type="submit" style={{ flex: 1, padding: '0.6rem', border: 'none', borderRadius: '8px', background: 'var(--navy, #1B2B4B)', color: '#fff', fontWeight: 600, cursor: 'pointer' }}>
+            <div style={{ display: 'flex', gap: '0.6rem', marginTop: '1.5rem' }}>
+              <button type="button" className="admin-btn-secondary" style={{ flex: 1 }} onClick={() => setShowForm(false)}>Cancel</button>
+              <button type="submit" className="admin-btn-primary" style={{ flex: 1 }}>
                 {editingId ? 'Save' : 'Create'}
               </button>
             </div>
