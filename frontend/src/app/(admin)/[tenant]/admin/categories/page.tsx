@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import api from '@/lib/api'
 import { getUser } from '@/lib/auth'
+import RichTextEditor from '@/components/admin/RichTextEditor'
 
 interface Category {
   id: string
@@ -144,8 +145,11 @@ export default function CategoriesPage() {
 
             <div style={{ marginBottom: '0.85rem' }}>
               <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Description</label>
-              <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}
-                style={{ width: '100%', padding: '0.5rem 0.65rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem', minHeight: '60px' }} />
+              <RichTextEditor
+                value={form.description}
+                onChange={(html) => setForm({ ...form, description: html })}
+                placeholder="Write the category description..."
+              />
             </div>
 
             <div style={{ marginBottom: '0.85rem' }}>

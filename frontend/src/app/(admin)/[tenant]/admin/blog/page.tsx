@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import api from '@/lib/api'
 import { getUser } from '@/lib/auth'
+import RichTextEditor from '@/components/admin/RichTextEditor'
 
 interface BlogPost {
   id: string
@@ -124,8 +125,11 @@ export default function BlogAdminPage() {
 
             <div style={{ marginBottom: '0.85rem' }}>
               <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Body</label>
-              <textarea value={form.body} onChange={(e) => setForm({ ...form, body: e.target.value })}
-                style={{ width: '100%', padding: '0.5rem 0.65rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem', minHeight: '120px' }} />
+              <RichTextEditor
+                value={form.body}
+                onChange={(html) => setForm({ ...form, body: html })}
+                placeholder="Write the post body..."
+              />
             </div>
 
             <div style={{ marginBottom: '0.85rem' }}>

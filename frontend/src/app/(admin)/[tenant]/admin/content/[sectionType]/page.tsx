@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import api from '@/lib/api'
 import { getUser } from '@/lib/auth'
+import RichTextEditor from '@/components/admin/RichTextEditor'
 
 const typeMap: Record<string, string> = {
   hero: 'Hero',
@@ -78,10 +79,10 @@ export default function ContentEditorPage() {
           <div key={f.key} style={{ marginBottom: '0.85rem' }}>
             <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>{f.label}</label>
             {f.textarea ? (
-              <textarea
+              <RichTextEditor
                 value={(form as any)[f.key] || ''}
-                onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
-                style={{ width: '100%', padding: '0.5rem 0.65rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem', minHeight: '90px' }}
+                onChange={(html) => setForm({ ...form, [f.key]: html })}
+                placeholder={`Write the ${f.label.toLowerCase()}...`}
               />
             ) : (
               <input

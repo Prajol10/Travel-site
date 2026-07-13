@@ -52,10 +52,13 @@ export default function AboutSection() {
             <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
               {section?.title || 'Journey with Passion & Experience'}
             </h2>
-            <p className="text-gray-600 leading-relaxed mb-8 text-lg">
-              {section?.body ||
-                'We have been guiding travelers to sacred and breathtaking destinations for years, committed to providing safe, enriching, and memorable travel experiences.'}
-            </p>
+            <div
+              className="text-gray-600 leading-relaxed mb-8 text-lg"
+              dangerouslySetInnerHTML={{
+                __html: section?.body ||
+                  'We have been guiding travelers to sacred and breathtaking destinations for years, committed to providing safe, enriching, and memorable travel experiences.',
+              }}
+            />
 
             <div className="flex gap-10 mb-9">
               <div className="flex items-center gap-3">
