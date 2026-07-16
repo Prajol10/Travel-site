@@ -19,6 +19,7 @@ export default function AdminDashboard() {
     { label: 'Blog', desc: 'Write and publish blog posts', href: `/${tenant}/admin/blog` },
     { label: 'Gallery', desc: 'Manage photo & video gallery', href: `/${tenant}/admin/gallery` },
     { label: 'Team', desc: 'Manage team members shown on site', href: `/${tenant}/admin/team` },
+    { label: 'Testimonials', desc: 'Manage customer reviews and ratings', href: `/${tenant}/admin/testimonials` },
     { label: 'Leads', desc: 'View and manage customer enquiries', href: `/${tenant}/admin/leads` },
     { label: 'Settings', desc: 'Branding, contact info & socials', href: `/${tenant}/admin/settings` },
   ]

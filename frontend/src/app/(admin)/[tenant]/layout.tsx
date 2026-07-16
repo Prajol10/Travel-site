@@ -30,6 +30,7 @@ export default async function AdminLayout({
         { label: 'Blog', href: `/${tenant}/admin/blog` },
         { label: 'Gallery', href: `/${tenant}/admin/gallery` },
         { label: 'Team', href: `/${tenant}/admin/team` },
+        { label: 'Testimonials', href: `/${tenant}/admin/testimonials` },
       ],
     },
     {
