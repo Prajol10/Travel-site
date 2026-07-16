@@ -6,6 +6,7 @@ import api from '@/lib/api'
 import { getUser } from '@/lib/auth'
 import RichTextEditor from '@/components/admin/RichTextEditor'
 import ImageUpload from '@/components/admin/ImageUpload'
+import VideoUpload from '@/components/admin/VideoUpload'
 
 const typeMap: Record<string, string> = {
   hero: 'Hero',
@@ -91,25 +92,40 @@ export default function ContentEditorPage() {
           { key: 'ctaUrl', label: 'CTA URL', help: 'Where the primary button links to (e.g. /tours)' },
           { key: 'secondaryCtaText', label: 'Secondary CTA Text', help: 'Label on the secondary button' },
           { key: 'secondaryCtaUrl', label: 'Secondary CTA URL', help: 'Where the secondary button links to' },
-        ].map((f) => (
-          <div key={f.key} className="admin-field">
-            <label className="admin-label">{f.label}</label>
-            {f.textarea ? (
-              <RichTextEditor
-                value={(form as any)[f.key] || ''}
-                onChange={(html) => setForm({ ...form, [f.key]: html })}
-                placeholder={`Write the ${f.label.toLowerCase()}...`}
-              />
-            ) : (
-              <input
-                className="admin-input"
-                value={(form as any)[f.key] || ''}
-                onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
-              />
-            )}
-            <span className="admin-help">{f.help}</span>
-          </div>
-        ))}
+        ].map((f) => {
+          if (f.key === 'secondaryCtaUrl' && sectionType === 'Hero') {
+            return (
+              <div key={f.key} className="admin-field">
+                <VideoUpload
+                  label="Watch Video"
+                  value={form.secondaryCtaUrl}
+                  onChange={(url) => setForm({ ...form, secondaryCtaUrl: url })}
+                  folder={`content/${sectionType.toLowerCase()}`}
+                />
+                <span className="admin-help">Video played when visitors click the "Watch Video" button</span>
+              </div>
+            )
+          }
+          return (
+            <div key={f.key} className="admin-field">
+              <label className="admin-label">{f.label}</label>
+              {f.textarea ? (
+                <RichTextEditor
+                  value={(form as any)[f.key] || ''}
+                  onChange={(html) => setForm({ ...form, [f.key]: html })}
+                  placeholder={`Write the ${f.label.toLowerCase()}...`}
+                />
+              ) : (
+                <input
+                  className="admin-input"
+                  value={(form as any)[f.key] || ''}
+                  onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
+                />
+              )}
+              <span className="admin-help">{f.help}</span>
+            </div>
+          )
+        })}
 
         <div className="admin-field">
           <ImageUpload
