@@ -87,6 +87,13 @@ builder.Services.AddResponseCompression();
 // ─── Build ──────────────────────────────────────────────────
 var app = builder.Build();
 
+// ─── Apply Pending Migrations ─────────────────────────────────
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<TravelPlatform.API.Data.AppDbContext>();
+    db.Database.Migrate();
+}
+
 // ─── Middleware Pipeline ─────────────────────────────────────
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseMiddleware<TenantResolutionMiddleware>();
