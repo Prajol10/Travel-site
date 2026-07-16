@@ -503,47 +503,50 @@ body {
 /* ─── Admin Panel UI ─────────────────────────────────────── */
 .admin-card {
   background: #fff;
-  border-radius: var(--radius-lg);
-  padding: 1.75rem;
-  box-shadow: 0 1px 3px rgba(27, 43, 75, 0.08);
-  border: 1px solid #EEF1F5;
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: 0 1px 2px rgba(27, 43, 75, 0.04), 0 16px 40px rgba(27, 43, 75, 0.10);
+  border: 1px solid rgba(27, 43, 75, 0.06);
+  border-top: 4px solid var(--gold);
 }
 
 .admin-card-title {
   font-family: var(--font-serif);
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--navy);
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.9rem;
-  border-bottom: 1px solid #EEF1F5;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--gold-pale);
+  letter-spacing: 0.01em;
 }
 
 .admin-field {
-  margin-bottom: 1.15rem;
+  margin-bottom: 1.4rem;
 }
 
 .admin-label {
   display: block;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--navy);
-  margin-bottom: 0.4rem;
-  letter-spacing: 0.01em;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .admin-input,
 .admin-textarea,
 .admin-select {
   width: 100%;
-  padding: 0.65rem 0.9rem;
+  padding: 0.85rem 1.1rem;
   border: 1.5px solid #E2E8F0;
-  border-radius: 10px;
-  font-size: 0.9rem;
+  border-radius: var(--radius);
+  font-size: 0.92rem;
   font-family: inherit;
   color: var(--navy);
-  background: #fff;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  background: #FAFBFC;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
 .admin-input:focus,
@@ -551,7 +554,8 @@ body {
 .admin-select:focus {
   outline: none;
   border-color: var(--gold);
-  box-shadow: 0 0 0 3px var(--gold-pale);
+  background: #fff;
+  box-shadow: 0 0 0 4px var(--gold-pale);
 }
 
 .admin-input::placeholder,
@@ -567,7 +571,7 @@ body {
 .admin-form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.15rem;
+  gap: 1.4rem;
 }
 
 @media (max-width: 640px) {
@@ -577,59 +581,68 @@ body {
 }
 
 .admin-btn-primary {
-  padding: 0.7rem 1.5rem;
+  padding: 0.85rem 1.9rem;
   border: none;
-  border-radius: 10px;
-  background: var(--navy);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.9rem;
+  letter-spacing: 0.02em;
   cursor: pointer;
-  transition: background 0.15s ease, transform 0.1s ease;
+  box-shadow: 0 8px 20px rgba(27, 43, 75, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .admin-btn-primary:hover {
-  background: var(--navy-light);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(27, 43, 75, 0.4);
 }
 
 .admin-btn-primary:active {
-  transform: scale(0.98);
+  transform: translateY(0);
 }
 
 .admin-btn-primary:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .admin-btn-secondary {
-  padding: 0.7rem 1.4rem;
-  border: 1.5px solid #E2E8F0;
-  border-radius: 10px;
+  padding: 0.85rem 1.7rem;
+  border: 1.5px solid var(--navy);
+  border-radius: var(--radius);
   background: #fff;
   color: var(--navy);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.9rem;
+  letter-spacing: 0.02em;
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .admin-btn-secondary:hover {
-  background: #F8FAFC;
-  border-color: #CBD5E1;
+  background: var(--navy);
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 .admin-btn-danger {
-  padding: 0.5rem 0.9rem;
+  padding: 0.55rem 1rem;
   border: 1.5px solid #FCA5A5;
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: #fff;
   color: #DC2626;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.8rem;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .admin-btn-danger:hover {
-  background: #FEF2F2;
+  background: #DC2626;
+  color: #fff;
+  border-color: #DC2626;
 }
