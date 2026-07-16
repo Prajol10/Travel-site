@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation'
 import api from '@/lib/api'
 import { getUser } from '@/lib/auth'
 import { TourListDto } from '@/types'
+import { ExternalLink } from 'lucide-react'
 
 export default function AdminDashboard() {
   const params = useParams()
@@ -41,9 +42,21 @@ export default function AdminDashboard() {
 
   return (
     <div>
-      <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', fontWeight: 700, color: 'var(--navy, #1B2B4B)', marginBottom: '1.5rem' }}>
-        Dashboard
-      </h1>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', fontWeight: 700, color: 'var(--navy)' }}>
+          Dashboard
+        </h1>
+        <Link
+          href={`/${tenant}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="admin-btn-secondary"
+          style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+        >
+          <ExternalLink size={16} />
+          View Live Site
+        </Link>
+      </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.25rem', marginBottom: '2.75rem' }}>
         <div className="admin-card" style={{ padding: '1.5rem' }}>

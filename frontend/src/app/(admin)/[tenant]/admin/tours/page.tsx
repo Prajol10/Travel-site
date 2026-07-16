@@ -38,13 +38,13 @@ export default function AdminToursPage() {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--navy, #1B2B4B)' }}>Tours</h1>
-        <Link href={`/${tenant}/admin/tours/new`} style={{ padding: '0.6rem 1.1rem', background: 'var(--navy, #1B2B4B)', color: '#fff', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, textDecoration: 'none' }}>
+        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--navy)' }}>Tours</h1>
+        <Link href={`/${tenant}/admin/tours/new`} className="admin-btn-primary" style={{ textDecoration: 'none', display: 'inline-block' }}>
           + New Tour
         </Link>
       </div>
 
-      <div style={{ background: '#fff', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 1px 3px rgba(27,43,75,0.08)' }}>
+      <div className="admin-card" style={{ padding: 0, overflow: 'hidden' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
           <thead>
             <tr style={{ background: '#F8FAFC', textAlign: 'left' }}>
@@ -68,8 +68,8 @@ export default function AdminToursPage() {
                   <td style={{ padding: '0.75rem 1rem', color: '#334155' }}>${t.priceUSD}</td>
                   <td style={{ padding: '0.75rem 1rem' }}>{t.isFeatured ? 'Yes' : 'No'}</td>
                   <td style={{ padding: '0.75rem 1rem', textAlign: 'right' }}>
-                    <Link href={`/${tenant}/admin/tours/${t.id}/edit`} style={{ marginRight: '0.5rem', padding: '0.35rem 0.7rem', fontSize: '0.8rem', border: '1px solid #CBD5E1', borderRadius: '6px', background: '#fff', textDecoration: 'none', color: '#334155' }}>Edit</Link>
-                    <button onClick={() => handleDelete(t.id)} style={{ padding: '0.35rem 0.7rem', fontSize: '0.8rem', border: '1px solid #FCA5A5', color: '#B91C1C', borderRadius: '6px', background: '#fff', cursor: 'pointer' }}>Delete</button>
+                    <Link href={`/${tenant}/admin/tours/${t.id}/edit`} className="admin-btn-secondary" style={{ marginRight: '0.5rem', padding: '0.4rem 0.9rem', fontSize: '0.8rem', textDecoration: 'none', display: 'inline-block' }}>Edit</Link>
+                    <button onClick={() => handleDelete(t.id)} className="admin-btn-danger">Delete</button>
                   </td>
                 </tr>
               ))
