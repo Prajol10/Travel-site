@@ -26,6 +26,7 @@ builder.Services.AddScoped<BlogService>();
 builder.Services.AddScoped<LeadService>();
 builder.Services.AddScoped<GalleryService>();
 builder.Services.AddScoped<TeamService>();
+builder.Services.AddScoped<WhyChooseUsService>();
 builder.Services.AddScoped<TestimonialService>();
 builder.Services.AddHttpClient<SupabaseStorageService>();
 
