@@ -454,6 +454,52 @@ body {
 }
 .tiptap-editor-content .ProseMirror a { color: #C9A84C; text-decoration: underline; }
 .tiptap-editor-content .ProseMirror img { max-width: 100%; border-radius: 8px; margin: 0.5rem 0; }
+.tiptap-editor-content .ProseMirror pre {
+  background: #1B2B4B;
+  color: #F1F5F9;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+}
+.tiptap-editor-content .ProseMirror code {
+  background: #F1F5F9;
+  color: #B91C1C;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+.tiptap-editor-content .ProseMirror pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+.tiptap-editor-content .ProseMirror hr {
+  border: none;
+  border-top: 2px solid #E2E8F0;
+  margin: 1.25rem 0;
+}
+.tiptap-editor-content .ProseMirror table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.75rem 0;
+}
+.tiptap-editor-content .ProseMirror th,
+.tiptap-editor-content .ProseMirror td {
+  border: 1px solid #E2E8F0;
+  padding: 0.5rem 0.7rem;
+  text-align: left;
+}
+.tiptap-editor-content .ProseMirror th {
+  background: #F8FAFC;
+  font-weight: 700;
+  color: #1B2B4B;
+}
+.tiptap-editor-content .ProseMirror mark {
+  border-radius: 3px;
+  padding: 0 0.15rem;
+}
 .tiptap-editor-content .ProseMirror p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
   color: #94A3B8;
