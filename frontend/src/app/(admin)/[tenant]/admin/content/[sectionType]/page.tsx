@@ -59,13 +59,19 @@ export default function ContentEditorPage() {
 
   if (loading) return <div style={{ color: '#94A3B8' }}>Loading...</div>
 
+  const sectionLabels: Record<string, string> = {
+    Hero: 'Hero Section',
+    AboutUs: 'About Us',
+    WhyChooseUs: 'Why Choose Us',
+  }
+
   return (
-    <div style={{ maxWidth: '560px' }}>
-      <h1 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#0F172A', marginBottom: '1.5rem' }}>
-        {sectionType} Editor
+    <div style={{ maxWidth: '640px' }}>
+      <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--navy)', marginBottom: '1.5rem' }}>
+        {sectionLabels[sectionType] || sectionType} Editor
       </h1>
 
-      <form onSubmit={handleSubmit} style={{ background: '#fff', padding: '1.5rem', borderRadius: '10px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
+      <form onSubmit={handleSubmit} className="admin-card">
         {[
           { key: 'badgeText', label: 'Badge Text' },
           { key: 'title', label: 'Title' },
@@ -76,8 +82,8 @@ export default function ContentEditorPage() {
           { key: 'secondaryCtaText', label: 'Secondary CTA Text' },
           { key: 'secondaryCtaUrl', label: 'Secondary CTA URL' },
         ].map((f) => (
-          <div key={f.key} style={{ marginBottom: '0.85rem' }}>
-            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>{f.label}</label>
+          <div key={f.key} className="admin-field">
+            <label className="admin-label">{f.label}</label>
             {f.textarea ? (
               <RichTextEditor
                 value={(form as any)[f.key] || ''}
@@ -86,15 +92,15 @@ export default function ContentEditorPage() {
               />
             ) : (
               <input
+                className="admin-input"
                 value={(form as any)[f.key] || ''}
                 onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
-                style={{ width: '100%', padding: '0.5rem 0.65rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem' }}
               />
             )}
           </div>
         ))}
 
-        <div style={{ marginBottom: '0.85rem' }}>
+        <div className="admin-field">
           <ImageUpload
             label="Image"
             value={form.imageUrl}
@@ -104,10 +110,12 @@ export default function ContentEditorPage() {
           />
         </div>
 
-        <button type="submit" disabled={saving} style={{ padding: '0.6rem 1.2rem', border: 'none', borderRadius: '8px', background: '#0F172A', color: '#fff', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.7 : 1 }}>
-          {saving ? 'Saving...' : 'Save'}
-        </button>
-        {saved && <span style={{ marginLeft: '0.75rem', color: '#166534', fontSize: '0.85rem' }}>Saved!</span>}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginTop: '0.5rem' }}>
+          <button type="submit" disabled={saving} className="admin-btn-primary">
+            {saving ? 'Saving...' : 'Save'}
+          </button>
+          {saved && <span style={{ color: '#166534', fontSize: '0.85rem', fontWeight: 600 }}>Saved!</span>}
+        </div>
       </form>
     </div>
   )
