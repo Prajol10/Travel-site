@@ -66,11 +66,11 @@ export default function SettingsPage() {
   ]
 
   return (
-    <div style={{ maxWidth: '560px' }}>
-      <h1 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#0F172A', marginBottom: '1.5rem' }}>Settings</h1>
+    <div style={{ maxWidth: '680px' }}>
+      <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--navy)', marginBottom: '1.5rem' }}>Settings</h1>
 
-      <form onSubmit={handleSubmit} style={{ background: '#fff', padding: '1.5rem', borderRadius: '10px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
-        <div style={{ marginBottom: '0.85rem' }}>
+      <form onSubmit={handleSubmit} className="admin-card">
+        <div className="admin-form-grid" style={{ marginBottom: '1.15rem' }}>
           <ImageUpload
             label="Logo"
             value={form.logoUrl || ''}
@@ -79,8 +79,6 @@ export default function SettingsPage() {
             recommendedSize="512 x 512"
             tenantId={getUser()?.tenantId}
           />
-        </div>
-        <div style={{ marginBottom: '0.85rem' }}>
           <ImageUpload
             label="Favicon"
             value={form.faviconUrl || ''}
@@ -90,21 +88,24 @@ export default function SettingsPage() {
             tenantId={getUser()?.tenantId}
           />
         </div>
-        {fields.map((f) => (
-          <div key={f.key} style={{ marginBottom: '0.85rem' }}>
-            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>{f.label}</label>
-            <input
-              value={form[f.key] || ''}
-              onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
-              style={{ width: '100%', padding: '0.5rem 0.65rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem' }}
-            />
-          </div>
-        ))}
-
-        <button type="submit" disabled={saving} style={{ padding: '0.6rem 1.2rem', border: 'none', borderRadius: '8px', background: '#0F172A', color: '#fff', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.7 : 1 }}>
-          {saving ? 'Saving...' : 'Save'}
-        </button>
-        {saved && <span style={{ marginLeft: '0.75rem', color: '#166534', fontSize: '0.85rem' }}>Saved!</span>}
+        <div className="admin-form-grid">
+          {fields.map((f) => (
+            <div key={f.key} className="admin-field">
+              <label className="admin-label">{f.label}</label>
+              <input
+                className="admin-input"
+                value={form[f.key] || ''}
+                onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
+              />
+            </div>
+          ))}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginTop: '0.5rem' }}>
+          <button type="submit" disabled={saving} className="admin-btn-primary">
+            {saving ? 'Saving...' : 'Save'}
+          </button>
+          {saved && <span style={{ color: '#166534', fontSize: '0.85rem', fontWeight: 600 }}>Saved!</span>}
+        </div>
       </form>
     </div>
   )
