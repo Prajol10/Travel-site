@@ -72,11 +72,17 @@ export default function VideoUpload({
 
       {value ? (
         <div style={{ position: 'relative', marginBottom: '0.6rem' }}>
-          <video
-            src={value}
-            controls
-            style={{ width: '100%', maxWidth: '360px', height: '200px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #E2E8F0', background: '#000' }}
-          />
+          {/youtube\.com|youtu\.be/.test(value) ? (
+            <div style={{ width: '100%', maxWidth: '360px', padding: '0.75rem', borderRadius: '8px', border: '1px solid #E2E8F0', background: '#F8FAFC', fontSize: '0.8rem', color: '#475569', wordBreak: 'break-all' }}>
+              YouTube URL is set: {value}
+            </div>
+          ) : (
+            <video
+              src={value}
+              controls
+              style={{ width: '100%', maxWidth: '360px', height: '200px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #E2E8F0', background: '#000' }}
+            />
+          )}
           <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
             <button
               type="button"

@@ -59,7 +59,7 @@ namespace TravelPlatform.API.Controllers
                 .AsNoTracking()
                 .Where(s => s.TenantId == tenantId && s.IsActive)
                 .OrderBy(s => s.SortOrder)
-                .Select(s => new { s.Id, s.Value, s.Label, s.SortOrder, s.IsActive })
+                .Select(s => new { s.Id, s.Value, s.Label, s.IconName, s.SortOrder, s.IsActive })
                 .ToListAsync();
 
             var whyChooseUs = await _db.WhyChooseUsItems

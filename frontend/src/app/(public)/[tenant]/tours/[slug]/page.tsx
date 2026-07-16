@@ -42,9 +42,10 @@ function parseFaqs(raw?: string): { question: string; answer: string }[] {
 function getYouTubeEmbedUrl(input?: string): string | null {
   if (!input) return null
   const trimmed = input.trim()
-  if (/^[a-zA-Z0-9_-]{11}$/.test(trimmed)) return `https://www.youtube.com/embed/${trimmed}`
+  const autoplayParams = 'autoplay=1&mute=1'
+  if (/^[a-zA-Z0-9_-]{11}$/.test(trimmed)) return `https://www.youtube.com/embed/${trimmed}?${autoplayParams}`
   const match = trimmed.match(/(?:youtu\.be\/|v=|embed\/)([a-zA-Z0-9_-]{11})/)
-  return match ? `https://www.youtube.com/embed/${match[1]}` : null
+  return match ? `https://www.youtube.com/embed/${match[1]}?${autoplayParams}` : null
 }
 
 const sections = [
@@ -417,6 +418,16 @@ export default function TourDetailPage() {
                     allowFullScreen
                   />
                 </div>
+              ) : tour.videoUrl ? (
+                <video
+                  src={tour.videoUrl}
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  style={{ width: '100%', borderRadius: '10px', maxHeight: '480px', background: '#000' }}
+                />
               ) : (
                 <p style={{ color: 'var(--gray-500)' }}>No video added yet.</p>
               )}

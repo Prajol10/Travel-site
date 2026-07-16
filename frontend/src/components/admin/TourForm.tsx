@@ -5,6 +5,7 @@ import api from '@/lib/api'
 import { useRouter, useParams } from 'next/navigation'
 import RichTextEditor from './RichTextEditor'
 import ImageUpload from './ImageUpload'
+import VideoUpload from './VideoUpload'
 import GoogleSearchPreview from './GoogleSearchPreview'
 
 interface ItineraryDay {
@@ -465,6 +466,15 @@ export default function TourForm({ initial, tourId }: { initial: TourFormData; t
         <div style={{ marginBottom: '1.75rem' }}>
           <label style={labelStyle}>Video URL (YouTube link or embed ID)</label>
           <input value={form.videoUrl} onChange={(e) => update({ videoUrl: e.target.value })} placeholder="https://youtube.com/watch?v=... or just the ID" style={inputStyle} />
+          <span style={{ display: 'block', fontSize: '0.75rem', color: '#94A3B8', marginTop: '0.35rem' }}>Or upload a video file below — uploading will replace the YouTube URL above.</span>
+        </div>
+        <div style={{ marginBottom: '1.75rem' }}>
+          <VideoUpload
+            label="Upload Video File"
+            value={form.videoUrl}
+            onChange={(url) => update({ videoUrl: url })}
+            folder="tours/videos"
+          />
         </div>
 
         <div style={{ marginBottom: '1.75rem' }}>
