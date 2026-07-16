@@ -166,6 +166,16 @@ export interface WhyChooseUsItem {
   isActive: boolean
 }
 
+export interface Destination {
+  id: string
+  name: string
+  country?: string
+  description: string
+  imageUrl?: string
+  sortOrder: number
+  isActive: boolean
+}
+
 export interface HomepageData {
   tenant: Tenant
   content: ContentSection[]
@@ -176,6 +186,7 @@ export interface HomepageData {
   blogs: BlogPost[]
   stats: StatItem[]
   whyChooseUs: WhyChooseUsItem[]
+  destinations: Destination[]
 }
 
 export interface AuthResponse {
