@@ -34,7 +34,11 @@ namespace TravelPlatform.API.Models.Enums
         Footer,
         Stats,
         FeaturedJourney,
-        CTA
+        CTA,
+        PrivacyPolicy,
+        TermsOfService,
+        BookingTerms,
+        DocumentRequirements
     }
 
     public enum GalleryMediaType
