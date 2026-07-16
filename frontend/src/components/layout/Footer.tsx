@@ -96,11 +96,11 @@ export default function Footer() {
           <div>
             <h4 style={{ fontWeight: 700, fontSize: '0.95rem', marginBottom: '1.25rem', color: '#ffffff' }}>Resources</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {['Booking Policy|/legal/booking', 'Legal Documents|/legal', 'Pricing Policy|/legal/pricing'].map((item) => {
+              {['Booking Policy|/legal/booking', 'Legal Documents|/legal/documents', 'Pricing Policy|/legal/pricing'].map((item) => {
                 const [label, href] = item.split('|')
                 return (
                   <li key={label}>
-                    <Link href={href} style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.875rem', textDecoration: 'none' }}>
+                    <Link href={tenantUrl(tenant?.subdomain, href)} style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.875rem', textDecoration: 'none' }}>
                       › {label}
                     </Link>
                   </li>
