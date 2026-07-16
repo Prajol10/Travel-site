@@ -9,7 +9,8 @@ namespace TravelPlatform.API.Controllers
     public class UploadsController : ControllerBase
     {
         private readonly SupabaseStorageService _storage;
-        private static readonly string[] AllowedTypes = { "image/jpeg", "image/png", "image/webp", "image/gif" };
+        private static readonly string[] AllowedImageTypes = { "image/jpeg", "image/png", "image/webp", "image/gif" };
+        private static readonly string[] AllowedVideoTypes = { "video/mp4", "video/webm", "video/quicktime" };
 
         public UploadsController(SupabaseStorageService storage)
         {
@@ -18,14 +19,20 @@ namespace TravelPlatform.API.Controllers
 
         [HttpPost]
         [Authorize(Roles = "TenantAdmin,SuperAdmin")]
-        [RequestSizeLimit(10_000_000)]
+        [RequestSizeLimit(50_000_000)]
         public async Task<IActionResult> Upload(IFormFile file, [FromForm] string? folder, [FromForm] string? tenantId)
         {
             if (file == null || file.Length == 0)
                 return BadRequest(new { success = false, message = "No file provided" });
 
-            if (!AllowedTypes.Contains(file.ContentType))
-                return BadRequest(new { success = false, message = "Only image files are allowed (jpeg, png, webp, gif)" });
+            var isImage = AllowedImageTypes.Contains(file.ContentType);
+            var isVideo = AllowedVideoTypes.Contains(file.ContentType);
+            if (!isImage && !isVideo)
+                return BadRequest(new { success = false, message = "Only image files (jpeg, png, webp, gif) or video files (mp4, webm, mov) are allowed" });
+            if (isImage && file.Length > 10_000_000)
+                return BadRequest(new { success = false, message = "Image files must be under 10MB" });
+            if (isVideo && file.Length > 50_000_000)
+                return BadRequest(new { success = false, message = "Video files must be under 50MB" });
 
             Guid resolvedTenantId;
             if (User.IsInRole("SuperAdmin") && !string.IsNullOrWhiteSpace(tenantId))
