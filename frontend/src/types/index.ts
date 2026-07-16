@@ -153,6 +153,7 @@ export interface StatItem {
   id: string
   value: string
   label: string
+  iconName?: string
   sortOrder: number
   isActive: boolean
 }

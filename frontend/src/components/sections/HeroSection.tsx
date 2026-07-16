@@ -9,7 +9,6 @@ import { getContentSection } from '@/lib/utils'
 export default function HeroSection() {
   const { data, tenant } = useTenant()
   const hero = getContentSection(data?.content || [], 'Hero')
-  const stats = data?.stats || []
   const galleryPreview = data?.gallery?.slice(0, 3) || []
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
@@ -90,28 +89,6 @@ export default function HeroSection() {
             </a>
           </div>
 
-          {stats.length > 0 && (
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '2.5rem',
-                opacity: mounted ? 1 : 0,
-                transition: 'opacity 0.7s ease 0.4s',
-              }}
-            >
-              {stats.map((stat) => (
-                <div key={stat.id}>
-                  <div style={{ fontSize: '2.5rem', fontWeight: 700, color: '#ffffff', fontFamily: 'var(--font-serif)', lineHeight: 1 }}>
-                    {stat.value}
-                  </div>
-                  <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </div>
 

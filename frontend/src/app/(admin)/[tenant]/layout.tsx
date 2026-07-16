@@ -33,6 +33,7 @@ export default async function AdminLayout({
         { label: 'Testimonials', href: `/${tenant}/admin/testimonials` },
         { label: 'Why Choose Us Items', href: `/${tenant}/admin/why-choose-us` },
         { label: 'Destinations', href: `/${tenant}/admin/destinations` },
+        { label: 'Trust Bar Stats', href: `/${tenant}/admin/stats` },
       ],
     },
     {
