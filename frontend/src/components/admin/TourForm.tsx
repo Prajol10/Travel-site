@@ -173,28 +173,15 @@ function SectionCard({
     <div
       id={id}
       ref={registerRef}
+      className="admin-card"
       style={{
-        background: '#fff',
-        borderRadius: '12px',
-        padding: '1.75rem',
-        boxShadow: '0 1px 3px rgba(27,43,75,0.08)',
-        marginBottom: '1.5rem',
+        marginBottom: '1.75rem',
         scrollMarginTop: '5.5rem',
       }}
     >
-      <h2
-        style={{
-          fontFamily: 'var(--font-serif)',
-          fontSize: '1.15rem',
-          fontWeight: 700,
-          color: 'var(--navy, #1B2B4B)',
-          marginBottom: '1.25rem',
-          paddingBottom: '0.75rem',
-          borderBottom: '1px solid #EEF1F5',
-        }}
-      >
+      <div className="admin-card-title">
         {title}
-      </h2>
+      </div>
       {children}
     </div>
   )
@@ -288,8 +275,8 @@ export default function TourForm({ initial, tourId }: { initial: TourFormData; t
     }
   }
 
-  const inputStyle = { width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem' }
-  const labelStyle = { display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.35rem' }
+  const inputStyle = { width: '100%', padding: '0.85rem 1.1rem', border: '1.5px solid #E2E8F0', borderRadius: '8px', fontSize: '0.92rem', color: 'var(--navy)', background: '#FAFBFC' }
+  const labelStyle = { display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--navy)', marginBottom: '0.5rem', letterSpacing: '0.05em', textTransform: 'uppercase' as const }
 
   return (
     <div style={{ paddingBottom: '5rem' }}>
@@ -313,15 +300,17 @@ export default function TourForm({ initial, tourId }: { initial: TourFormData; t
               type="button"
               onClick={() => scrollToSection(s.id)}
               style={{
-                padding: '0.6rem 0.9rem',
+                padding: '0.7rem 1.1rem',
                 background: activeSection === s.id ? '#fff' : 'none',
                 border: 'none',
-                borderBottom: activeSection === s.id ? '2px solid var(--gold, #C9A84C)' : '2px solid transparent',
+                borderBottom: activeSection === s.id ? '3px solid var(--gold)' : '3px solid transparent',
                 borderRadius: '8px 8px 0 0',
-                color: activeSection === s.id ? 'var(--navy, #1B2B4B)' : '#94A3B8',
-                fontWeight: activeSection === s.id ? 700 : 500,
+                color: activeSection === s.id ? 'var(--navy)' : '#94A3B8',
+                fontWeight: activeSection === s.id ? 700 : 600,
                 fontSize: '0.85rem',
+                letterSpacing: '0.01em',
                 cursor: 'pointer',
+                boxShadow: activeSection === s.id ? '0 1px 3px rgba(27,43,75,0.06)' : 'none',
               }}
             >
               {s.label}
@@ -575,18 +564,18 @@ export default function TourForm({ initial, tourId }: { initial: TourFormData; t
           position: 'sticky',
           bottom: 0,
           display: 'flex',
-          gap: '0.6rem',
-          padding: '1rem',
+          gap: '0.75rem',
+          padding: '1.25rem',
           background: '#fff',
           borderTop: '1px solid #E2E8F0',
           borderRadius: '12px',
-          boxShadow: '0 -2px 8px rgba(27,43,75,0.06)',
+          boxShadow: '0 -8px 24px rgba(27,43,75,0.1)',
         }}
       >
         <button
           type="button"
           onClick={() => router.push(`/${tenant}/admin/tours`)}
-          style={{ padding: '0.65rem 1.25rem', border: '1px solid #CBD5E1', borderRadius: '8px', background: '#fff', cursor: 'pointer', fontSize: '0.875rem' }}
+          className="admin-btn-secondary"
         >
           Cancel
         </button>
@@ -594,7 +583,7 @@ export default function TourForm({ initial, tourId }: { initial: TourFormData; t
           type="button"
           onClick={handleSave}
           disabled={saving}
-          style={{ padding: '0.65rem 1.5rem', border: 'none', borderRadius: '8px', background: 'var(--navy, #1B2B4B)', color: '#fff', fontWeight: 600, cursor: 'pointer', fontSize: '0.875rem', opacity: saving ? 0.7 : 1 }}
+          className="admin-btn-primary"
         >
           {saving ? 'Saving...' : tourId ? 'Save Changes' : 'Create Tour'}
         </button>
