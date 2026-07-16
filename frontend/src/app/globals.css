@@ -692,3 +692,12 @@ body {
   color: #fff;
   border-color: #DC2626;
 }
+
+.admin-help {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: #8B95A5;
+  margin-top: 0.35rem;
+  line-height: 1.4;
+}

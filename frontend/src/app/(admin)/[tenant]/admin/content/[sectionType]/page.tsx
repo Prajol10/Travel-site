@@ -73,14 +73,14 @@ export default function ContentEditorPage() {
 
       <form onSubmit={handleSubmit} className="admin-card">
         {[
-          { key: 'badgeText', label: 'Badge Text' },
-          { key: 'title', label: 'Title' },
-          { key: 'subtitle', label: 'Subtitle' },
-          { key: 'body', label: 'Body', textarea: true },
-          { key: 'ctaText', label: 'CTA Text' },
-          { key: 'ctaUrl', label: 'CTA URL' },
-          { key: 'secondaryCtaText', label: 'Secondary CTA Text' },
-          { key: 'secondaryCtaUrl', label: 'Secondary CTA URL' },
+          { key: 'badgeText', label: 'Badge Text', help: 'Small label shown above the main heading' },
+          { key: 'title', label: 'Title', help: 'The large heading text for this section' },
+          { key: 'subtitle', label: 'Subtitle', help: 'Supporting line shown below the title' },
+          { key: 'body', label: 'Body', textarea: true, help: 'Main paragraph content for this section' },
+          { key: 'ctaText', label: 'CTA Text', help: 'Label on the primary button' },
+          { key: 'ctaUrl', label: 'CTA URL', help: 'Where the primary button links to (e.g. /tours)' },
+          { key: 'secondaryCtaText', label: 'Secondary CTA Text', help: 'Label on the secondary button' },
+          { key: 'secondaryCtaUrl', label: 'Secondary CTA URL', help: 'Where the secondary button links to' },
         ].map((f) => (
           <div key={f.key} className="admin-field">
             <label className="admin-label">{f.label}</label>
@@ -97,6 +97,7 @@ export default function ContentEditorPage() {
                 onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
               />
             )}
+            <span className="admin-help">{f.help}</span>
           </div>
         ))}
 
@@ -108,6 +109,7 @@ export default function ContentEditorPage() {
             folder={`content/${sectionType.toLowerCase()}`}
             recommendedSize="1600 x 1067"
           />
+          <span className="admin-help">Background/featured image for this section</span>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginTop: '0.5rem' }}>
