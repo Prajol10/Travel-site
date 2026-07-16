@@ -55,8 +55,8 @@ export default function TeamPage() {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <h1 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#0F172A' }}>Team</h1>
-        <button onClick={() => setShowForm(true)} style={{ padding: '0.55rem 1rem', background: '#0F172A', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}>
+        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--navy)' }}>Team</h1>
+        <button onClick={() => setShowForm(true)} className="admin-btn-primary">
           + Add Member
         </button>
       </div>
@@ -68,24 +68,24 @@ export default function TeamPage() {
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem' }}>
           {members.map((m) => (
-            <div key={m.id} style={{ background: '#fff', borderRadius: '10px', padding: '1rem', boxShadow: '0 1px 3px rgba(0,0,0,0.08)', textAlign: 'center' }}>
+            <div key={m.id} className="admin-card" style={{ textAlign: 'center' }}>
               <img
                 src={m.photoUrl || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(m.fullName)}
                 alt={m.fullName}
-                style={{ width: '64px', height: '64px', borderRadius: '50%', objectFit: 'cover', margin: '0 auto 0.6rem' }}
+                style={{ width: '72px', height: '72px', borderRadius: '50%', objectFit: 'cover', margin: '0 auto 0.75rem', border: '2px solid var(--gold-pale)' }}
               />
-              <div style={{ fontWeight: 600, color: '#0F172A', fontSize: '0.9rem' }}>{m.fullName}</div>
-              <div style={{ color: '#64748B', fontSize: '0.8rem', marginBottom: '0.75rem' }}>{m.role || '-'}</div>
-              <button onClick={() => handleDelete(m.id)} style={{ width: '100%', padding: '0.35rem', fontSize: '0.75rem', border: '1px solid #FCA5A5', color: '#B91C1C', borderRadius: '6px', background: '#fff', cursor: 'pointer' }}>Remove</button>
+              <div style={{ fontWeight: 700, color: 'var(--navy)', fontSize: '0.9rem' }}>{m.fullName}</div>
+              <div style={{ color: '#64748B', fontSize: '0.8rem', marginBottom: '0.85rem' }}>{m.role || '-'}</div>
+              <button onClick={() => handleDelete(m.id)} className="admin-btn-danger" style={{ width: '100%' }}>Remove</button>
             </div>
           ))}
         </div>
       )}
 
       {showForm && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }}>
-          <form onSubmit={handleSubmit} style={{ background: '#fff', borderRadius: '10px', padding: '1.75rem', width: '400px' }}>
-            <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem', color: '#0F172A' }}>Add Team Member</h2>
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50, padding: '2rem 1rem' }}>
+          <form onSubmit={handleSubmit} className="admin-card" style={{ width: '460px', maxWidth: '100%', maxHeight: '90vh', overflowY: 'auto' }}>
+            <div className="admin-card-title">Add Team Member</div>
             {[
               { key: 'fullName', label: 'Full Name', required: true },
               { key: 'role', label: 'Role' },
@@ -93,18 +93,18 @@ export default function TeamPage() {
               { key: 'phoneNumber', label: 'Phone Number' },
               { key: 'email', label: 'Email' },
             ].map((f) => (
-              <div key={f.key} style={{ marginBottom: '0.85rem' }}>
-                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>{f.label}</label>
+              <div key={f.key} className="admin-field">
+                <label className="admin-label">{f.label}</label>
                 <input
                   required={f.required}
+                  className="admin-input"
                   value={(form as any)[f.key]}
                   onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
-                  style={{ width: '100%', padding: '0.5rem 0.65rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem' }}
                 />
               </div>
             ))}
 
-            <div style={{ marginBottom: '0.85rem' }}>
+            <div className="admin-field">
               <ImageUpload
                 label="Photo"
                 value={form.photoUrl}
@@ -113,9 +113,9 @@ export default function TeamPage() {
                 recommendedSize="400 x 400"
               />
             </div>
-            <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
-              <button type="button" onClick={() => setShowForm(false)} style={{ flex: 1, padding: '0.6rem', border: '1px solid #CBD5E1', borderRadius: '8px', background: '#fff', cursor: 'pointer' }}>Cancel</button>
-              <button type="submit" style={{ flex: 1, padding: '0.6rem', border: 'none', borderRadius: '8px', background: '#0F172A', color: '#fff', fontWeight: 600, cursor: 'pointer' }}>Add</button>
+            <div style={{ display: 'flex', gap: '0.6rem', marginTop: '1.5rem' }}>
+              <button type="button" className="admin-btn-secondary" style={{ flex: 1 }} onClick={() => setShowForm(false)}>Cancel</button>
+              <button type="submit" className="admin-btn-primary" style={{ flex: 1 }}>Add</button>
             </div>
           </form>
         </div>
