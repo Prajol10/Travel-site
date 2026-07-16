@@ -45,39 +45,37 @@ export default function AdminDashboard() {
         Dashboard
       </h1>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2.5rem' }}>
-        <div style={{ background: '#fff', padding: '1.25rem', borderRadius: '12px', boxShadow: '0 1px 3px rgba(27,43,75,0.08)' }}>
-          <div style={{ fontSize: '0.8rem', color: '#6B7280', fontWeight: 600 }}>Total Tours</div>
-          <div style={{ fontSize: '1.9rem', fontWeight: 700, color: 'var(--navy, #1B2B4B)' }}>{loading ? '...' : tours.length}</div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.25rem', marginBottom: '2.75rem' }}>
+        <div className="admin-card" style={{ padding: '1.5rem' }}>
+          <div style={{ fontSize: '0.78rem', color: '#8B95A5', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Total Tours</div>
+          <div style={{ fontSize: '2.2rem', fontWeight: 800, color: 'var(--navy)', marginTop: '0.4rem' }}>{loading ? '...' : tours.length}</div>
         </div>
-        <div style={{ background: '#fff', padding: '1.25rem', borderRadius: '12px', boxShadow: '0 1px 3px rgba(27,43,75,0.08)' }}>
-          <div style={{ fontSize: '0.8rem', color: '#6B7280', fontWeight: 600 }}>Featured Tours</div>
-          <div style={{ fontSize: '1.9rem', fontWeight: 700, color: 'var(--navy, #1B2B4B)' }}>{loading ? '...' : tours.filter(t => t.isFeatured).length}</div>
+        <div className="admin-card" style={{ padding: '1.5rem' }}>
+          <div style={{ fontSize: '0.78rem', color: '#8B95A5', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Featured Tours</div>
+          <div style={{ fontSize: '2.2rem', fontWeight: 800, color: 'var(--navy)', marginTop: '0.4rem' }}>{loading ? '...' : tours.filter(t => t.isFeatured).length}</div>
         </div>
-        <div style={{ background: '#fff', padding: '1.25rem', borderRadius: '12px', boxShadow: '0 1px 3px rgba(27,43,75,0.08)' }}>
-          <div style={{ fontSize: '0.8rem', color: '#6B7280', fontWeight: 600 }}>New Leads</div>
-          <div style={{ fontSize: '1.9rem', fontWeight: 700, color: 'var(--gold, #C9A84C)' }}>{loading ? '...' : leadCount}</div>
+        <div className="admin-card" style={{ padding: '1.5rem' }}>
+          <div style={{ fontSize: '0.78rem', color: '#8B95A5', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>New Leads</div>
+          <div style={{ fontSize: '2.2rem', fontWeight: 800, color: 'var(--gold)', marginTop: '0.4rem' }}>{loading ? '...' : leadCount}</div>
         </div>
       </div>
 
-      <h2 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--navy, #1B2B4B)', marginBottom: '1rem' }}>Manage Website</h2>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '1rem' }}>
+      <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 700, color: 'var(--navy)', marginBottom: '1.25rem' }}>Manage Website</h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '1.25rem' }}>
         {sections.map((s) => (
           <Link
             key={s.href}
             href={s.href}
+            className="admin-card admin-card-hover"
             style={{
               display: 'block',
-              background: '#fff',
-              borderRadius: '12px',
-              padding: '1.25rem',
-              boxShadow: '0 1px 3px rgba(27,43,75,0.08)',
               textDecoration: 'none',
-              borderLeft: '3px solid var(--gold, #C9A84C)',
+              padding: '1.5rem',
+              transition: 'transform 0.15s ease, box-shadow 0.15s ease',
             }}
           >
-            <div style={{ fontWeight: 700, color: 'var(--navy, #1B2B4B)', fontSize: '0.95rem', marginBottom: '0.3rem' }}>{s.label}</div>
-            <div style={{ color: '#6B7280', fontSize: '0.8rem' }}>{s.desc}</div>
+            <div style={{ fontWeight: 700, color: 'var(--navy)', fontSize: '0.98rem', marginBottom: '0.35rem' }}>{s.label}</div>
+            <div style={{ color: '#8B95A5', fontSize: '0.82rem' }}>{s.desc}</div>
           </Link>
         ))}
       </div>
