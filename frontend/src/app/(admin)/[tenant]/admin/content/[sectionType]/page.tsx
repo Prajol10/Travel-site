@@ -11,6 +11,10 @@ const typeMap: Record<string, string> = {
   hero: 'Hero',
   about: 'AboutUs',
   whychooseus: 'WhyChooseUs',
+  privacy: 'PrivacyPolicy',
+  terms: 'TermsOfService',
+  'booking-terms': 'BookingTerms',
+  'document-requirements': 'DocumentRequirements',
 }
 
 export default function ContentEditorPage() {
@@ -63,6 +67,10 @@ export default function ContentEditorPage() {
     Hero: 'Hero Section',
     AboutUs: 'About Us',
     WhyChooseUs: 'Why Choose Us',
+    PrivacyPolicy: 'Privacy Policy',
+    TermsOfService: 'Terms of Service',
+    BookingTerms: 'Booking Terms',
+    DocumentRequirements: 'Document Requirements',
   }
 
   return (

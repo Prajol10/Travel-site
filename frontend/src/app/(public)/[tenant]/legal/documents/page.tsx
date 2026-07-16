@@ -1,29 +1,38 @@
+'use client'
+import { useTenant } from '@/context/TenantContext'
+import { getContentSection } from '@/lib/utils'
+
+const FALLBACK_BODY = `
+  <p>The following documents are available upon request for verification purposes:</p>
+  <ul>
+    <li>Business Registration Certificate</li>
+    <li>Tourism Board License</li>
+    <li>Tax Clearance Certificate</li>
+    <li>Insurance Certificate</li>
+  </ul>
+  <p>Please contact us if you would like copies of any of these documents.</p>
+`
+
 export default function LegalDocumentsPage() {
+  const { data } = useTenant()
+  const section = getContentSection(data?.content || [], 'DocumentRequirements')
+
   return (
     <>
       <div style={{ background: 'var(--navy)', padding: '120px 0 60px' }}>
         <div className="container" style={{ textAlign: 'center' }}>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 700, color: '#ffffff' }}>
-            Legal Documents
+            {section?.title || 'Legal Documents'}
           </h1>
         </div>
       </div>
       <section style={{ padding: '96px 0', background: '#ffffff' }}>
         <div className="container" style={{ maxWidth: '800px' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            {['Business Registration Certificate', 'Tourism Board License', 'Tax Clearance Certificate', 'Insurance Certificate'].map((doc) => (
-              <div key={doc} className="card" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{ width: '3rem', height: '3rem', borderRadius: '8px', background: 'var(--gold-pale)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📄</div>
-                  <div>
-                    <div style={{ fontWeight: 600, color: 'var(--navy)' }}>{doc}</div>
-                    <div style={{ color: 'var(--gray-400)', fontSize: '0.875rem' }}>Official document</div>
-                  </div>
-                </div>
-                <span style={{ color: 'var(--gold)', fontWeight: 600, fontSize: '0.875rem' }}>View →</span>
-              </div>
-            ))}
-          </div>
+          <div
+            className="tour-full-description"
+            style={{ lineHeight: 1.8, color: 'var(--gray-600)', fontSize: '1rem' }}
+            dangerouslySetInnerHTML={{ __html: section?.body || FALLBACK_BODY }}
+          />
         </div>
       </section>
     </>

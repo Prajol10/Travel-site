@@ -38,7 +38,8 @@ namespace TravelPlatform.API.Models.Enums
         PrivacyPolicy,
         TermsOfService,
         BookingTerms,
-        DocumentRequirements
+        DocumentRequirements,
+        PricingPolicy
     }
 
     public enum GalleryMediaType
