@@ -35,11 +35,15 @@ export default function BlogPage() {
               {posts.map((post) => (
                 <a key={post.id} href={tenantUrl(params.tenant as string, `/blog/${post.slug}`)} className="card" style={{ display: 'block', textDecoration: 'none' }}>
                   <div style={{ height: '220px', overflow: 'hidden' }}>
-                    <img
-                      src={post.coverImageUrl || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2070'}
-                      alt={post.title}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
+                    {post.coverImageUrl ? (
+                      <img
+                        src={post.coverImageUrl}
+                        alt={post.title}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    ) : (
+                      <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }} />
+                    )}
                   </div>
                   <div style={{ padding: '1.5rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem', marginBottom: '0.75rem' }}>

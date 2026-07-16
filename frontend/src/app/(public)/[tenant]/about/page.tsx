@@ -30,11 +30,15 @@ export default function AboutPage() {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
             <div style={{ borderRadius: '1rem', overflow: 'hidden', aspectRatio: '4/3' }}>
-              <img
-                src={section?.imageUrl || 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=2070'}
-                alt="About us"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
+              {section?.imageUrl ? (
+                <img
+                  src={section.imageUrl}
+                  alt="About us"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              ) : (
+                <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }} />
+              )}
             </div>
             <div>
               <div className="section-label-left" style={{ marginBottom: '1.25rem' }}>Our Story</div>

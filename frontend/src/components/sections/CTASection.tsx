@@ -14,13 +14,6 @@ export default function CTASection() {
       className="relative py-24 overflow-hidden"
       style={{ background: 'var(--navy)' }}
     >
-      <div
-        className="absolute inset-0 opacity-10 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            'url(https://images.unsplash.com/photo-1486911278844-a81c5267e227?q=80&w=2070&auto=format&fit=crop)',
-        }}
-      />
       <div className="container relative z-10 text-center">
         <h2
           style={{

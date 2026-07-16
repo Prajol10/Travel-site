@@ -91,12 +91,16 @@ function ToursContent() {
               {tours.map((tour) => (
                 <a key={tour.id} href={tenantUrl(tenantSlug, `/tours/${tour.slug}`)} className="tour-card" style={{ display: 'block', textDecoration: 'none' }}>
                   <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
-                    <img
-                      src={tour.coverImageUrl || 'https://images.unsplash.com/photo-1486911278844-a81c5267e227?q=80&w=2070&auto=format&fit=crop'}
-                      alt={tour.title}
-                      className="tour-card-img"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
+                    {tour.coverImageUrl ? (
+                      <img
+                        src={tour.coverImageUrl}
+                        alt={tour.title}
+                        className="tour-card-img"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    ) : (
+                      <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }} />
+                    )}
                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6), transparent)' }} />
                     <div style={{ position: 'absolute', bottom: '0.75rem', left: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.375rem', color: '#ffffff', fontSize: '0.75rem', fontWeight: 500 }}>
                       <MapPin size={12} /> {tour.categoryName || 'Himalayan Tour'}

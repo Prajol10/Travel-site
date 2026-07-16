@@ -31,12 +31,16 @@ export default function DestinationsPage() {
               {destinations.map((dest) => (
                 <a key={dest.id} href={tenantUrl(tenantSlug, '/tours')} className="tour-card" style={{ display: 'block', textDecoration: 'none' }}>
                   <div style={{ height: '240px', overflow: 'hidden', position: 'relative' }}>
-                    <img
-                      src={dest.imageUrl || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070'}
-                      alt={dest.name}
-                      className="tour-card-img"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
+                    {dest.imageUrl ? (
+                      <img
+                        src={dest.imageUrl}
+                        alt={dest.name}
+                        className="tour-card-img"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    ) : (
+                      <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }} />
+                    )}
                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.65), transparent)' }} />
                     <div style={{ position: 'absolute', bottom: '1rem', left: '1rem' }}>
                       {dest.country && (

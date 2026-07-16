@@ -14,15 +14,17 @@ export default function HeroSection() {
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
 
-  const bgImage =
-    hero?.imageUrl ||
-    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=2070&auto=format&fit=crop'
+  const bgImage = hero?.imageUrl
 
   return (
     <section className="relative min-h-screen flex items-end overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${bgImage})` }}
+        style={
+          bgImage
+            ? { backgroundImage: `url(${bgImage})` }
+            : { background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }
+        }
       />
       <div className="absolute inset-0 hero-overlay" />
 

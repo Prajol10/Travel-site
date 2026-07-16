@@ -231,11 +231,15 @@ export default function TourDetailPage() {
   return (
     <>
       <div style={{ position: 'relative', height: '340px', overflow: 'hidden' }}>
-        <img
-          src={tour.coverImageUrl || 'https://images.unsplash.com/photo-1486911278844-a81c5267e227?q=80&w=2070&auto=format&fit=crop'}
-          alt={tour.title}
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        />
+        {tour.coverImageUrl ? (
+          <img
+            src={tour.coverImageUrl}
+            alt={tour.title}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        ) : (
+          <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }} />
+        )}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(27,43,75,0.9), rgba(27,43,75,0.25))' }} />
         <div className="container" style={{ position: 'absolute', bottom: '1.75rem', left: 0, right: 0 }}>
           {tour.isFeatured && (
@@ -527,7 +531,11 @@ export default function TourDetailPage() {
               {similar.map((s) => (
                 <a key={s.id} href={tenantUrl(params.tenant as string, `/tours/${s.slug}`)} style={{ display: 'block', textDecoration: 'none' }}>
                   <div style={{ height: '160px', borderRadius: '10px', overflow: 'hidden', marginBottom: '0.6rem' }}>
-                    <img src={s.coverImageUrl || 'https://images.unsplash.com/photo-1486911278844-a81c5267e227?q=80&w=2070&auto=format&fit=crop'} alt={s.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    {s.coverImageUrl ? (
+                      <img src={s.coverImageUrl} alt={s.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : (
+                      <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }} />
+                    )}
                   </div>
                   <div style={{ fontWeight: 700, color: 'var(--navy)', fontSize: '0.95rem', marginBottom: '0.25rem' }}>{s.title}</div>
                   <div style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.9rem' }}>{formatPrice(s.priceUSD, s.priceINR, s.priceEUR, currency)}</div>

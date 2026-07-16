@@ -28,11 +28,15 @@ export default function PopularTours() {
           {tours.map((tour) => (
             <a key={tour.id} href={tenantUrl(tenant?.subdomain, `/tours/${tour.slug}`)} className="tour-card block">
               <div className="relative h-56 overflow-hidden">
-                <img
-                  src={tour.coverImageUrl || 'https://images.unsplash.com/photo-1486911278844-a81c5267e227?q=80&w=2070&auto=format&fit=crop'}
-                  alt={tour.title}
-                  className="tour-card-img w-full h-full object-cover"
-                />
+                {tour.coverImageUrl ? (
+                  <img
+                    src={tour.coverImageUrl}
+                    alt={tour.title}
+                    className="tour-card-img w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full" style={{ background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }} />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-white text-xs font-medium">
                   <MapPin size={13} />

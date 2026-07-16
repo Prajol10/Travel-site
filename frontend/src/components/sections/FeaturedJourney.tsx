@@ -59,11 +59,15 @@ export default function FeaturedJourney() {
           {/* Image */}
           <div style={{ position: 'relative' }}>
             <div style={{ borderRadius: '1.25rem', overflow: 'hidden', aspectRatio: '4/5', boxShadow: '0 20px 60px rgba(0,0,0,0.15)' }}>
-              <img
-                src={featured.coverImageUrl || 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1974&auto=format&fit=crop'}
-                alt={featured.title}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
+              {featured.coverImageUrl ? (
+                <img
+                  src={featured.coverImageUrl}
+                  alt={featured.title}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              ) : (
+                <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }} />
+              )}
             </div>
 
             {featured.rating && (

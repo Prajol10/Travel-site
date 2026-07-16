@@ -26,11 +26,15 @@ export default function BlogSection() {
           {posts.map((post) => (
             <a key={post.id} href={tenantUrl(tenant?.subdomain, `/blog/${post.slug}`)} className="card block">
               <div className="h-52 overflow-hidden">
-                <img
-                  src={post.coverImageUrl || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2070&auto=format&fit=crop'}
-                  alt={post.title}
-                  className="w-full h-full object-cover"
-                />
+                {post.coverImageUrl ? (
+                  <img
+                    src={post.coverImageUrl}
+                    alt={post.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full" style={{ background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }} />
+                )}
               </div>
               <div className="p-6">
                 <div className="flex items-center gap-2 text-xs mb-3">

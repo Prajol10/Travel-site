@@ -11,17 +11,24 @@ export default function AboutSection() {
   const gallery = data?.gallery?.slice(0, 4) || []
 
   return (
-    <section className="section bg-white">
+    <section className="section bg-white overflow-hidden">
       <div className="container">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Image side */}
-          <div className="relative">
+          <div className="relative min-w-0">
             <div className="rounded-2xl overflow-hidden aspect-[4/3] relative">
-              <img
-                src={section?.imageUrl || 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=2070&auto=format&fit=crop'}
-                alt="About us"
-                className="w-full h-full object-cover"
-              />
+              {section?.imageUrl ? (
+                <img
+                  src={section.imageUrl}
+                  alt="About us"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div
+                  className="w-full h-full"
+                  style={{ background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }}
+                />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-navy/50 to-transparent" />
             </div>
 
@@ -47,9 +54,9 @@ export default function AboutSection() {
           </div>
 
           {/* Text side */}
-          <div>
+          <div className="min-w-0">
             <div className="section-label-left mb-5">About Us</div>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight break-words">
               {section?.title || 'Journey with Passion & Experience'}
             </h2>
             <div
