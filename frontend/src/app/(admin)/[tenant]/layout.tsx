@@ -40,6 +40,7 @@ export default async function AdminLayout({
         { label: 'Terms of Service', href: `/${tenant}/admin/content/terms` },
         { label: 'Booking Terms', href: `/${tenant}/admin/content/booking-terms` },
         { label: 'Document Requirements', href: `/${tenant}/admin/content/document-requirements` },
+        { label: 'Pricing Policy', href: `/${tenant}/admin/content/pricing` },
       ],
     },
     {

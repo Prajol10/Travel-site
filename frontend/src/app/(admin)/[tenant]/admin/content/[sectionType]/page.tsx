@@ -15,6 +15,7 @@ const typeMap: Record<string, string> = {
   terms: 'TermsOfService',
   'booking-terms': 'BookingTerms',
   'document-requirements': 'DocumentRequirements',
+  pricing: 'PricingPolicy',
 }
 
 export default function ContentEditorPage() {
@@ -71,6 +72,7 @@ export default function ContentEditorPage() {
     TermsOfService: 'Terms of Service',
     BookingTerms: 'Booking Terms',
     DocumentRequirements: 'Document Requirements',
+    PricingPolicy: 'Pricing Policy',
   }
 
   return (
