@@ -115,11 +115,13 @@ export default function BlogAdminPage() {
             <div className="admin-field">
               <label className="admin-label">Title</label>
               <input required className="admin-input" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
+              <span className="admin-help">The headline shown on the blog list and post page</span>
             </div>
 
             <div className="admin-field">
               <label className="admin-label">Excerpt</label>
               <textarea className="admin-textarea" style={{ minHeight: '60px' }} value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} />
+              <span className="admin-help">Short summary shown on the blog list page</span>
             </div>
 
             <div className="admin-field">
@@ -129,6 +131,7 @@ export default function BlogAdminPage() {
                 onChange={(html) => setForm({ ...form, body: html })}
                 placeholder="Write the post body..."
               />
+              <span className="admin-help">The full article content</span>
             </div>
 
             <div className="admin-field">
@@ -139,11 +142,13 @@ export default function BlogAdminPage() {
                 folder="blog"
                 recommendedSize="1200 x 630"
               />
+              <span className="admin-help">Featured image shown on the blog list and post header</span>
             </div>
 
             <div className="admin-field">
               <label className="admin-label">Category</label>
               <input className="admin-input" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} />
+              <span className="admin-help">Used to group and filter posts on the blog page</span>
             </div>
 
             <div className="admin-field" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

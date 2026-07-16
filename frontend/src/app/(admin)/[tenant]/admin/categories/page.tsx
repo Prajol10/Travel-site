@@ -81,13 +81,13 @@ export default function CategoriesPage() {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--navy, #1B2B4B)' }}>Tour Categories</h1>
-        <button onClick={openCreate} style={{ padding: '0.6rem 1.1rem', background: 'var(--navy, #1B2B4B)', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}>
+        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--navy)' }}>Tour Categories</h1>
+        <button onClick={openCreate} className="admin-btn-primary">
           + New Category
         </button>
       </div>
 
-      <div style={{ background: '#fff', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 1px 3px rgba(27,43,75,0.08)' }}>
+      <div className="admin-card" style={{ padding: 0, overflow: 'hidden' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
           <thead>
             <tr style={{ background: '#F8FAFC', textAlign: 'left' }}>
@@ -121,8 +121,8 @@ export default function CategoriesPage() {
                     </button>
                   </td>
                   <td style={{ padding: '0.75rem 1rem', textAlign: 'right' }}>
-                    <button onClick={() => openEdit(cat)} style={{ marginRight: '0.5rem', padding: '0.35rem 0.7rem', fontSize: '0.8rem', border: '1px solid #CBD5E1', borderRadius: '6px', background: '#fff', cursor: 'pointer' }}>Edit</button>
-                    <button onClick={() => handleDelete(cat.id, cat.tourCount)} style={{ padding: '0.35rem 0.7rem', fontSize: '0.8rem', border: '1px solid #FCA5A5', color: '#B91C1C', borderRadius: '6px', background: '#fff', cursor: 'pointer' }}>Delete</button>
+                    <button onClick={() => openEdit(cat)} className="admin-btn-secondary" style={{ marginRight: '0.5rem', padding: '0.4rem 0.9rem', fontSize: '0.8rem' }}>Edit</button>
+                    <button onClick={() => handleDelete(cat.id, cat.tourCount)} className="admin-btn-danger">Delete</button>
                   </td>
                 </tr>
               ))
@@ -141,6 +141,7 @@ export default function CategoriesPage() {
             <div className="admin-field">
               <label className="admin-label">Name</label>
               <input required className="admin-input" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+              <span className="admin-help">Shown on category filters and the tours page</span>
             </div>
 
             <div className="admin-field">
@@ -150,6 +151,7 @@ export default function CategoriesPage() {
                 onChange={(html) => setForm({ ...form, description: html })}
                 placeholder="Write the category description..."
               />
+              <span className="admin-help">Optional details about this tour category</span>
             </div>
 
             <div className="admin-field">
@@ -160,11 +162,13 @@ export default function CategoriesPage() {
                 folder="categories"
                 recommendedSize="128 x 128"
               />
+              <span className="admin-help">Small icon representing this category</span>
             </div>
 
             <div className="admin-field">
               <label className="admin-label">Sort Order</label>
               <input type="number" className="admin-input" value={form.sortOrder} onChange={(e) => setForm({ ...form, sortOrder: Number(e.target.value) })} />
+              <span className="admin-help">Lower numbers appear first in category lists</span>
             </div>
 
             <div style={{ display: 'flex', gap: '0.6rem', marginTop: '1.5rem' }}>

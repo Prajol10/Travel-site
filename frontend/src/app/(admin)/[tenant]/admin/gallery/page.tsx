@@ -91,11 +91,13 @@ export default function GalleryPage() {
                 folder="gallery"
                 recommendedSize="1600 x 1067"
               />
+              <span className="admin-help">Shown in the public Gallery section</span>
             </div>
 
             <div className="admin-field">
               <label className="admin-label">Caption</label>
               <input className="admin-input" value={form.caption} onChange={(e) => setForm({ ...form, caption: e.target.value })} />
+              <span className="admin-help">Short text shown under or over this image</span>
             </div>
 
             <div className="admin-field">
@@ -104,6 +106,7 @@ export default function GalleryPage() {
                 <option value="Photo">Photo</option>
                 <option value="Video">Video</option>
               </select>
+              <span className="admin-help">Choose Video if the URL points to a video file</span>
             </div>
 
             <div style={{ display: 'flex', gap: '0.6rem', marginTop: '1.5rem' }}>

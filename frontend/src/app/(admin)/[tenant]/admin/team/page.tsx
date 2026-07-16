@@ -87,11 +87,11 @@ export default function TeamPage() {
           <form onSubmit={handleSubmit} className="admin-card" style={{ width: '460px', maxWidth: '100%', maxHeight: '90vh', overflowY: 'auto' }}>
             <div className="admin-card-title">Add Team Member</div>
             {[
-              { key: 'fullName', label: 'Full Name', required: true },
-              { key: 'role', label: 'Role' },
-              { key: 'region', label: 'Region' },
-              { key: 'phoneNumber', label: 'Phone Number' },
-              { key: 'email', label: 'Email' },
+              { key: 'fullName', label: 'Full Name', required: true, help: 'Shown on the public Team section' },
+              { key: 'role', label: 'Role', help: 'Job title shown below their name' },
+              { key: 'region', label: 'Region', help: 'Area or destination this person specializes in' },
+              { key: 'phoneNumber', label: 'Phone Number', help: 'Not shown publicly unless your template displays it' },
+              { key: 'email', label: 'Email', help: 'Not shown publicly unless your template displays it' },
             ].map((f) => (
               <div key={f.key} className="admin-field">
                 <label className="admin-label">{f.label}</label>
@@ -101,6 +101,7 @@ export default function TeamPage() {
                   value={(form as any)[f.key]}
                   onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
                 />
+                <span className="admin-help">{f.help}</span>
               </div>
             ))}
 
@@ -112,6 +113,7 @@ export default function TeamPage() {
                 folder="team"
                 recommendedSize="400 x 400"
               />
+              <span className="admin-help">Profile picture shown on the public Team section</span>
             </div>
             <div style={{ display: 'flex', gap: '0.6rem', marginTop: '1.5rem' }}>
               <button type="button" className="admin-btn-secondary" style={{ flex: 1 }} onClick={() => setShowForm(false)}>Cancel</button>

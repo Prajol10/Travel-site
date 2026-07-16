@@ -50,19 +50,19 @@ export default function SettingsPage() {
   if (loading) return <div style={{ color: '#94A3B8' }}>Loading...</div>
 
   const fields = [
-    { key: 'name', label: 'Agency Name' },
-    { key: 'tagLine', label: 'Tagline' },
-    { key: 'primaryColor', label: 'Primary Color' },
-    { key: 'secondaryColor', label: 'Secondary Color' },
-    { key: 'phoneNumber', label: 'Phone Number' },
-    { key: 'whatsAppNumber', label: 'WhatsApp Number' },
-    { key: 'email', label: 'Email' },
-    { key: 'address', label: 'Address' },
-    { key: 'facebookUrl', label: 'Facebook URL' },
-    { key: 'instagramUrl', label: 'Instagram URL' },
-    { key: 'youTubeUrl', label: 'YouTube URL' },
-    { key: 'twitterUrl', label: 'Twitter URL' },
-    { key: 'defaultCurrency', label: 'Default Currency' },
+    { key: 'name', label: 'Agency Name', help: 'Shown in the navbar and browser tab title' },
+    { key: 'tagLine', label: 'Tagline', help: 'Short phrase shown next to your agency name' },
+    { key: 'primaryColor', label: 'Primary Color', help: 'Main accent color used across your site (hex code)' },
+    { key: 'secondaryColor', label: 'Secondary Color', help: 'Supporting accent color (hex code)' },
+    { key: 'phoneNumber', label: 'Phone Number', help: 'Shown in the header and contact page' },
+    { key: 'whatsAppNumber', label: 'WhatsApp Number', help: 'Used for the WhatsApp chat button' },
+    { key: 'email', label: 'Email', help: 'Shown on the contact page and footer' },
+    { key: 'address', label: 'Address', help: 'Shown on the contact page' },
+    { key: 'facebookUrl', label: 'Facebook URL', help: 'Link shown in the footer social icons' },
+    { key: 'instagramUrl', label: 'Instagram URL', help: 'Link shown in the footer social icons' },
+    { key: 'youTubeUrl', label: 'YouTube URL', help: 'Link shown in the footer social icons' },
+    { key: 'twitterUrl', label: 'Twitter URL', help: 'Link shown in the footer social icons' },
+    { key: 'defaultCurrency', label: 'Default Currency', help: 'Currency shown by default for tour prices' },
   ]
 
   return (
@@ -71,22 +71,28 @@ export default function SettingsPage() {
 
       <form onSubmit={handleSubmit} className="admin-card">
         <div className="admin-form-grid" style={{ marginBottom: '1.15rem' }}>
-          <ImageUpload
-            label="Logo"
-            value={form.logoUrl || ''}
-            onChange={(url) => setForm({ ...form, logoUrl: url })}
-            folder="branding/logo"
-            recommendedSize="512 x 512"
-            tenantId={getUser()?.tenantId}
-          />
-          <ImageUpload
-            label="Favicon"
-            value={form.faviconUrl || ''}
-            onChange={(url) => setForm({ ...form, faviconUrl: url })}
-            folder="branding/favicon"
-            recommendedSize="64 x 64"
-            tenantId={getUser()?.tenantId}
-          />
+          <div>
+            <ImageUpload
+              label="Logo"
+              value={form.logoUrl || ''}
+              onChange={(url) => setForm({ ...form, logoUrl: url })}
+              folder="branding/logo"
+              recommendedSize="512 x 512"
+              tenantId={getUser()?.tenantId}
+            />
+            <span className="admin-help">Shown in the navbar and footer</span>
+          </div>
+          <div>
+            <ImageUpload
+              label="Favicon"
+              value={form.faviconUrl || ''}
+              onChange={(url) => setForm({ ...form, faviconUrl: url })}
+              folder="branding/favicon"
+              recommendedSize="64 x 64"
+              tenantId={getUser()?.tenantId}
+            />
+            <span className="admin-help">Small icon shown in the browser tab</span>
+          </div>
         </div>
         <div className="admin-form-grid">
           {fields.map((f) => (
@@ -97,6 +103,7 @@ export default function SettingsPage() {
                 value={form[f.key] || ''}
                 onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
               />
+              <span className="admin-help">{f.help}</span>
             </div>
           ))}
         </div>
