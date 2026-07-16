@@ -61,13 +61,13 @@ export default function BlogAdminPage() {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <h1 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#0F172A' }}>Blog</h1>
-        <button onClick={() => setShowForm(true)} style={{ padding: '0.55rem 1rem', background: '#0F172A', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}>
+        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--navy)' }}>Blog</h1>
+        <button onClick={() => setShowForm(true)} className="admin-btn-primary">
           + New Post
         </button>
       </div>
 
-      <div style={{ background: '#fff', borderRadius: '10px', overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
+      <div className="admin-card" style={{ padding: 0, overflow: 'hidden' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
           <thead>
             <tr style={{ background: '#F8FAFC', textAlign: 'left' }}>
@@ -108,24 +108,22 @@ export default function BlogAdminPage() {
       </div>
 
       {showForm && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50, overflowY: 'auto', padding: '2rem 0' }}>
-          <form onSubmit={handleSubmit} style={{ background: '#fff', borderRadius: '10px', padding: '1.75rem', width: '460px', maxHeight: '90vh', overflowY: 'auto' }}>
-            <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem', color: '#0F172A' }}>New Post</h2>
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50, overflowY: 'auto', padding: '2rem 1rem' }}>
+          <form onSubmit={handleSubmit} className="admin-card" style={{ width: '540px', maxWidth: '100%', maxHeight: '90vh', overflowY: 'auto' }}>
+            <div className="admin-card-title">New Post</div>
 
-            <div style={{ marginBottom: '0.85rem' }}>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Title</label>
-              <input required value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })}
-                style={{ width: '100%', padding: '0.5rem 0.65rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem' }} />
+            <div className="admin-field">
+              <label className="admin-label">Title</label>
+              <input required className="admin-input" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
             </div>
 
-            <div style={{ marginBottom: '0.85rem' }}>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Excerpt</label>
-              <textarea value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })}
-                style={{ width: '100%', padding: '0.5rem 0.65rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem', minHeight: '60px' }} />
+            <div className="admin-field">
+              <label className="admin-label">Excerpt</label>
+              <textarea className="admin-textarea" style={{ minHeight: '60px' }} value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} />
             </div>
 
-            <div style={{ marginBottom: '0.85rem' }}>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Body</label>
+            <div className="admin-field">
+              <label className="admin-label">Body</label>
               <RichTextEditor
                 value={form.body}
                 onChange={(html) => setForm({ ...form, body: html })}
@@ -133,7 +131,7 @@ export default function BlogAdminPage() {
               />
             </div>
 
-            <div style={{ marginBottom: '0.85rem' }}>
+            <div className="admin-field">
               <ImageUpload
                 label="Cover Image"
                 value={form.coverImageUrl}
@@ -143,20 +141,19 @@ export default function BlogAdminPage() {
               />
             </div>
 
-            <div style={{ marginBottom: '0.85rem' }}>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Category</label>
-              <input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}
-                style={{ width: '100%', padding: '0.5rem 0.65rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem' }} />
+            <div className="admin-field">
+              <label className="admin-label">Category</label>
+              <input className="admin-input" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} />
             </div>
 
-            <div style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div className="admin-field" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <input type="checkbox" checked={form.publishNow} onChange={(e) => setForm({ ...form, publishNow: e.target.checked })} />
               <label style={{ fontSize: '0.85rem', color: '#334155' }}>Publish immediately</label>
             </div>
 
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <button type="button" onClick={() => setShowForm(false)} style={{ flex: 1, padding: '0.6rem', border: '1px solid #CBD5E1', borderRadius: '8px', background: '#fff', cursor: 'pointer' }}>Cancel</button>
-              <button type="submit" style={{ flex: 1, padding: '0.6rem', border: 'none', borderRadius: '8px', background: '#0F172A', color: '#fff', fontWeight: 600, cursor: 'pointer' }}>Create</button>
+            <div style={{ display: 'flex', gap: '0.6rem', marginTop: '1.5rem' }}>
+              <button type="button" className="admin-btn-secondary" style={{ flex: 1 }} onClick={() => setShowForm(false)}>Cancel</button>
+              <button type="submit" className="admin-btn-primary" style={{ flex: 1 }}>Create</button>
             </div>
           </form>
         </div>
