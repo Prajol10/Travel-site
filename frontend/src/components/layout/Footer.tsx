@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Send, MapPin, Phone, Mail } from 'lucide-react'
+import { Send, MapPin, Phone, Mail, Facebook, Instagram, Youtube, Twitter } from 'lucide-react'
 import { useTenant } from '@/context/TenantContext'
 import { tenantUrl } from '@/lib/utils'
 
@@ -10,6 +10,7 @@ export default function Footer() {
   const { tenant, data } = useTenant()
   const [email, setEmail] = useState('')
   const topTours = data?.tours?.slice(0, 4) || []
+  const topDestinations = data?.destinations?.slice(0, 4) || []
 
   return (
     <footer style={{ background: 'var(--navy-dark)', color: '#ffffff', paddingTop: '5rem', paddingBottom: '2rem' }}>
@@ -30,9 +31,13 @@ export default function Footer() {
             <p style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '0.75rem' }}>
               Operated &amp; Managed By
             </p>
-            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: '#ffffff' }}>
-              {tenant?.name || 'Travel Company'}
-            </h3>
+            {tenant?.logoUrl ? (
+              <img src={tenant.logoUrl} alt={tenant.name} style={{ maxHeight: '2.75rem', maxWidth: '160px', objectFit: 'contain', marginBottom: '0.75rem' }} />
+            ) : (
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: '#ffffff' }}>
+                {tenant?.name || 'Travel Company'}
+              </h3>
+            )}
             <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.875rem', marginBottom: '1.25rem', lineHeight: 1.6 }}>
               {tenant?.tagLine || 'Your trusted partner for spiritual and adventure journeys'}
             </p>
@@ -92,6 +97,22 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Destinations */}
+          {topDestinations.length > 0 && (
+            <div>
+              <h4 style={{ fontWeight: 700, fontSize: '0.95rem', marginBottom: '1.25rem', color: '#ffffff' }}>Destinations</h4>
+              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {topDestinations.map((dest) => (
+                  <li key={dest.id}>
+                    <Link href={tenantUrl(tenant?.subdomain, '/destinations')} style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.875rem', textDecoration: 'none' }}>
+                      › {dest.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {/* Resources */}
           <div>
             <h4 style={{ fontWeight: 700, fontSize: '0.95rem', marginBottom: '1.25rem', color: '#ffffff' }}>Resources</h4>
@@ -148,6 +169,32 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
+        {/* Social icons */}
+        {(tenant?.facebookUrl || tenant?.instagramUrl || tenant?.youTubeUrl || tenant?.twitterUrl) && (
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', paddingBottom: '2.5rem' }}>
+            {tenant.facebookUrl && (
+              <Link href={tenant.facebookUrl} target="_blank" rel="noopener noreferrer" style={{ width: '2.25rem', height: '2.25rem', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Facebook size={16} color="rgba(255,255,255,0.7)" />
+              </Link>
+            )}
+            {tenant.instagramUrl && (
+              <Link href={tenant.instagramUrl} target="_blank" rel="noopener noreferrer" style={{ width: '2.25rem', height: '2.25rem', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Instagram size={16} color="rgba(255,255,255,0.7)" />
+              </Link>
+            )}
+            {tenant.youTubeUrl && (
+              <Link href={tenant.youTubeUrl} target="_blank" rel="noopener noreferrer" style={{ width: '2.25rem', height: '2.25rem', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Youtube size={16} color="rgba(255,255,255,0.7)" />
+              </Link>
+            )}
+            {tenant.twitterUrl && (
+              <Link href={tenant.twitterUrl} target="_blank" rel="noopener noreferrer" style={{ width: '2.25rem', height: '2.25rem', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Twitter size={16} color="rgba(255,255,255,0.7)" />
+              </Link>
+            )}
+          </div>
+        )}
 
         {/* Bottom bar */}
         <div style={{
