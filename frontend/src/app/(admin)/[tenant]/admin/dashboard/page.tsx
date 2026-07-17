@@ -23,6 +23,7 @@ export default function AdminDashboard() {
     { label: 'Why Choose Us Items', desc: 'Manage the icon cards shown in Why Choose Us', href: `/${tenant}/admin/why-choose-us` },
     { label: 'Destinations', desc: 'Manage destinations shown on the Destinations page', href: `/${tenant}/admin/destinations` },
     { label: 'Trust Bar Stats', desc: 'Manage the stats shown below your homepage hero', href: `/${tenant}/admin/stats` },
+    { label: 'FAQs', desc: 'Manage general company FAQs shown on your site', href: `/${tenant}/admin/faqs` },
     { label: 'Leads', desc: 'View and manage customer enquiries', href: `/${tenant}/admin/leads` },
     { label: 'Settings', desc: 'Branding, contact info & socials', href: `/${tenant}/admin/settings` },
   ]

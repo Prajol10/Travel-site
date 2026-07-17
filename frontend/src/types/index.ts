@@ -177,6 +177,14 @@ export interface Destination {
   isActive: boolean
 }
 
+export interface FaqItem {
+  id: string
+  question: string
+  answer: string
+  sortOrder: number
+  isActive: boolean
+}
+
 export interface HomepageData {
   tenant: Tenant
   content: ContentSection[]
@@ -188,6 +196,7 @@ export interface HomepageData {
   stats: StatItem[]
   whyChooseUs: WhyChooseUsItem[]
   destinations: Destination[]
+  faqs: FaqItem[]
 }
 
 export interface AuthResponse {

@@ -7,6 +7,7 @@ import AboutSection from '@/components/sections/AboutSection'
 import Testimonials from '@/components/sections/Testimonials'
 import BlogSection from '@/components/sections/BlogSection'
 import GallerySection from '@/components/sections/GallerySection'
+import FaqSection from '@/components/sections/FaqSection'
 import CTASection from '@/components/sections/CTASection'
 
 export default function HomePage() {
@@ -21,6 +22,7 @@ export default function HomePage() {
       <Testimonials />
       <BlogSection />
       <GallerySection />
+      <FaqSection />
       <CTASection />
     </>
   )

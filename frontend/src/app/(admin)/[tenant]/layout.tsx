@@ -34,6 +34,7 @@ export default async function AdminLayout({
         { label: 'Why Choose Us Items', href: `/${tenant}/admin/why-choose-us` },
         { label: 'Destinations', href: `/${tenant}/admin/destinations` },
         { label: 'Trust Bar Stats', href: `/${tenant}/admin/stats` },
+        { label: 'FAQs', href: `/${tenant}/admin/faqs` },
       ],
     },
     {
