@@ -8,6 +8,7 @@ import { useCurrency } from '@/context/CurrencyContext'
 import { formatPrice } from '@/lib/utils'
 import api from '@/lib/api'
 import FaqSection from '@/components/sections/FaqSection'
+import SpeakToExpert from '@/components/sections/SpeakToExpert'
 import { Eye, Bookmark, Feather, Info, Map as MapIcon, Video as VideoIcon, HelpCircle, Star, Clock, Mountain, Users, MapPin, ChevronDown, Download } from 'lucide-react'
 
 function parseList(raw?: string): string[] {
@@ -557,6 +558,7 @@ export default function TourDetailPage() {
           </div>
         </section>
       )}
+      <SpeakToExpert />
       <FaqSection />
     </>
   )
