@@ -76,6 +76,13 @@ namespace TravelPlatform.API.Controllers
                 .Select(d => new { d.Id, d.Name, d.Country, d.Description, d.ImageUrl, d.SortOrder, d.IsActive })
                 .ToListAsync();
 
+            var faqs = await _db.FaqItems
+                .AsNoTracking()
+                .Where(f => f.TenantId == tenantId && f.IsActive)
+                .OrderBy(f => f.SortOrder)
+                .Select(f => new { f.Id, f.Question, f.Answer, f.SortOrder, f.IsActive })
+                .ToListAsync();
+
             var tenantData = new
             {
                 tenant.Id,
@@ -115,7 +122,8 @@ namespace TravelPlatform.API.Controllers
                     blogs,
                     stats,
                     whyChooseUs,
-                    destinations
+                    destinations,
+                    faqs
                 }
             };
 

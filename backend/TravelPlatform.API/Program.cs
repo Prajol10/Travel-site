@@ -29,6 +29,7 @@ builder.Services.AddScoped<TeamService>();
 builder.Services.AddScoped<WhyChooseUsService>();
 builder.Services.AddScoped<DestinationService>();
 builder.Services.AddScoped<StatItemService>();
+builder.Services.AddScoped<FaqItemService>();
 builder.Services.AddScoped<TestimonialService>();
 builder.Services.AddHttpClient<SupabaseStorageService>();
 

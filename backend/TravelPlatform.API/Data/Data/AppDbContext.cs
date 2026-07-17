@@ -15,6 +15,7 @@ namespace TravelPlatform.API.Data
         public DbSet<ContentSection> ContentSections => Set<ContentSection>();
         public DbSet<WhyChooseUsItem> WhyChooseUsItems => Set<WhyChooseUsItem>();
         public DbSet<Destination> Destinations => Set<Destination>();
+        public DbSet<FaqItem> FaqItems => Set<FaqItem>();
         public DbSet<StatItem> StatItems => Set<StatItem>();
         public DbSet<Testimonial> Testimonials => Set<Testimonial>();
         public DbSet<GalleryItem> GalleryItems => Set<GalleryItem>();
@@ -120,6 +121,17 @@ namespace TravelPlatform.API.Data
                 e.HasOne(d => d.Tenant)
                     .WithMany()
                     .HasForeignKey(d => d.TenantId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // ---------- FaqItem ----------
+            modelBuilder.Entity<FaqItem>(e =>
+            {
+                e.HasKey(f => f.Id);
+                e.Property(f => f.Question).IsRequired().HasMaxLength(500);
+                e.HasOne(f => f.Tenant)
+                    .WithMany()
+                    .HasForeignKey(f => f.TenantId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
