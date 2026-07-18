@@ -1,22 +1,34 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { PlayCircle } from 'lucide-react'
+import { PlayCircle, Users, Star, DollarSign, Leaf, Award, Clock, ShieldCheck, ThumbsUp } from 'lucide-react'
 import { useTenant } from '@/context/TenantContext'
 import { tenantUrl } from '@/lib/utils'
 import { getContentSection } from '@/lib/utils'
+
+const ICON_MAP: Record<string, any> = {
+  users: Users,
+  star: Star,
+  'dollar-sign': DollarSign,
+  leaf: Leaf,
+  award: Award,
+  clock: Clock,
+  'shield-check': ShieldCheck,
+  'thumbs-up': ThumbsUp,
+}
 
 export default function HeroSection() {
   const { data, tenant } = useTenant()
   const hero = getContentSection(data?.content || [], 'Hero')
   const galleryPreview = data?.gallery?.slice(0, 3) || []
+  const stats = data?.stats || []
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
 
   const bgImage = hero?.imageUrl
 
   return (
-    <section className="relative min-h-screen flex items-end overflow-hidden">
+    <section className="relative min-h-screen flex flex-col overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={
@@ -27,7 +39,7 @@ export default function HeroSection() {
       />
       <div className="absolute inset-0 hero-overlay" />
 
-      <div className="container relative z-10 pb-20 pt-32">
+      <div className="container relative z-10 pb-16 pt-32 flex-1 flex items-end">
         <div className="max-w-3xl">
           {hero?.badgeText && (
             <div
@@ -75,7 +87,6 @@ export default function HeroSection() {
               display: 'flex',
               flexWrap: 'wrap',
               gap: '1rem',
-              marginBottom: '4rem',
               opacity: mounted ? 1 : 0,
               transition: 'opacity 0.7s ease 0.3s',
             }}
@@ -88,12 +99,11 @@ export default function HeroSection() {
               {hero?.secondaryCtaText || 'Watch Video'}
             </a>
           </div>
-
         </div>
       </div>
 
       {galleryPreview.length > 0 && (
-        <div style={{ display: 'flex', gap: '0.75rem', position: 'absolute', bottom: '5rem', right: '3rem', zIndex: 10 }}
+        <div style={{ display: 'flex', gap: '0.75rem', position: 'absolute', bottom: stats.length > 0 ? '9rem' : '5rem', right: '3rem', zIndex: 10 }}
           className="hidden lg:flex">
           {galleryPreview.map((item, i) => (
             <div
@@ -112,6 +122,45 @@ export default function HeroSection() {
               <img src={item.url} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
           ))}
+        </div>
+      )}
+
+      {stats.length > 0 && (
+        <div className="relative z-10" style={{ borderTop: '1px solid rgba(255,255,255,0.15)' }}>
+          <div className="container">
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: `repeat(${Math.min(stats.length, 4)}, 1fr)`,
+                padding: '1.75rem 0',
+              }}
+            >
+              {stats.map((stat, i) => {
+                const Icon = ICON_MAP[stat.iconName?.toLowerCase() || ''] || Award
+                return (
+                  <div
+                    key={stat.id}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.75rem',
+                      padding: '0 1rem',
+                      borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.15)' : 'none',
+                    }}
+                  >
+                    <Icon size={26} strokeWidth={1.5} style={{ color: 'var(--gold)', flexShrink: 0 }} />
+                    <div>
+                      <div style={{ fontWeight: 700, color: '#ffffff', fontSize: '1.15rem', lineHeight: 1.2, fontFamily: 'var(--font-serif)' }}>
+                        {stat.value}
+                      </div>
+                      <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.8rem' }}>{stat.label}</div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
         </div>
       )}
     </section>

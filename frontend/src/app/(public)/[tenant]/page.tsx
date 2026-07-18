@@ -1,5 +1,4 @@
 import HeroSection from '@/components/sections/HeroSection'
-import TrustBar from '@/components/sections/TrustBar'
 import FeaturedJourney from '@/components/sections/FeaturedJourney'
 import PopularTours from '@/components/sections/PopularTours'
 import WhyChooseUs from '@/components/sections/WhyChooseUs'
@@ -15,7 +14,6 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <TrustBar />
       <FeaturedJourney />
       <PopularTours />
       <WhyChooseUs />
