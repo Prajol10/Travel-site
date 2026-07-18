@@ -13,10 +13,10 @@ export default function AboutSection() {
   return (
     <section className="section bg-white overflow-hidden">
       <div className="container">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-[5fr_6fr] gap-12 lg:gap-16 items-center">
           {/* Image side */}
           <div className="relative min-w-0">
-            <div className="rounded-2xl overflow-hidden aspect-[4/3] relative">
+            <div className="rounded-2xl overflow-hidden aspect-[4/3.6] relative">
               {section?.imageUrl ? (
                 <img
                   src={section.imageUrl}

@@ -18,7 +18,7 @@ export default function WhyChooseUs() {
   if (items.length === 0) return null
 
   return (
-    <section id="why-us" style={{ background: '#FAF9F6', padding: '96px 0' }}>
+    <section id="why-us" style={{ background: '#FAF9F6', padding: '64px 0 96px' }}>
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <h2 style={{

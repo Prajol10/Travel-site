@@ -31,7 +31,7 @@ export default function PopularTours() {
   if (allTours.length === 0) return null
 
   return (
-    <section className="section bg-off-white" style={{ background: '#FAF9F6' }}>
+    <section className="section-sm bg-off-white" style={{ background: '#FAF9F6' }}>
       <div className="container">
         <div className="text-center mb-10">
           <div className="section-label justify-center mb-5">Popular Tours</div>
@@ -109,7 +109,7 @@ export default function PopularTours() {
           </div>
         )}
 
-        <div className="text-center mt-14">
+        <div className="text-center mt-10">
           <a href={tenantUrl(tenant?.subdomain, '/tours')} className="btn-outline-gold">
             View All Tour Packages
           </a>

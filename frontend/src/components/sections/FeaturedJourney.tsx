@@ -22,7 +22,7 @@ export default function FeaturedJourney() {
   return (
     <section style={{ padding: '96px 0', background: '#ffffff' }}>
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '6fr 5fr', gap: '4rem', alignItems: 'center' }}>
           {/* Text */}
           <div>
             <div className="section-label-left" style={{ marginBottom: '1.25rem' }}>Featured Journey</div>
@@ -58,7 +58,7 @@ export default function FeaturedJourney() {
 
           {/* Image */}
           <div style={{ position: 'relative' }}>
-            <div style={{ borderRadius: '1.25rem', overflow: 'hidden', aspectRatio: '4/5', boxShadow: '0 20px 60px rgba(0,0,0,0.15)' }}>
+            <div style={{ borderRadius: '1.25rem', overflow: 'hidden', aspectRatio: '4/4.2', boxShadow: '0 20px 60px rgba(0,0,0,0.15)' }}>
               {featured.coverImageUrl ? (
                 <img
                   src={featured.coverImageUrl}
