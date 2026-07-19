@@ -11,8 +11,8 @@ export default function CTASection() {
 
   return (
     <section
-      className="relative py-24 overflow-hidden"
-      style={{ background: 'var(--navy)' }}
+      className="relative overflow-hidden"
+      style={{ background: 'var(--navy)', padding: '6.5rem 0 5.5rem' }}
     >
       <div className="container relative z-10 text-center">
         <h2

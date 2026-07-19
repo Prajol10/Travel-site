@@ -67,19 +67,19 @@ export default function AboutSection() {
               }}
             />
 
-            <div className="flex gap-10 mb-9">
-              <div className="flex items-center gap-3">
-                <Award size={28} className="text-gold" strokeWidth={1.5} />
+            <div className="flex flex-wrap gap-8 mb-10 pb-8" style={{ borderBottom: '1px solid #EEEAE0' }}>
+              <div className="flex items-center gap-4">
+                <Award size={30} className="text-gold" strokeWidth={1.5} />
                 <div>
-                  <div className="font-bold text-navy text-sm">Award Winning</div>
-                  <div className="text-gray-500 text-xs">Best Adventure Operator</div>
+                  <div className="font-bold text-navy text-base mb-1">Award Winning</div>
+                  <div className="text-gray-500 text-sm">Best Adventure Operator</div>
                 </div>
               </div>
-              <div className="flex items-center gap-3">
-                <Leaf size={28} className="text-gold" strokeWidth={1.5} />
+              <div className="flex items-center gap-4">
+                <Leaf size={30} className="text-gold" strokeWidth={1.5} />
                 <div>
-                  <div className="font-bold text-navy text-sm">Eco-Friendly</div>
-                  <div className="text-gray-500 text-xs">Sustainable tourism</div>
+                  <div className="font-bold text-navy text-base mb-1">Eco-Friendly</div>
+                  <div className="text-gray-500 text-sm">Sustainable tourism</div>
                 </div>
               </div>
             </div>

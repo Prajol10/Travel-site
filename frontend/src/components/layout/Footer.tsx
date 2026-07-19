@@ -59,6 +59,7 @@ export default function Footer() {
             borderRadius: '1rem',
             padding: '2rem',
             gridColumn: 'span 1',
+            minWidth: 0,
           }}>
             <p style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '0.85rem', fontWeight: 600 }}>
               Operated &amp; Managed By
@@ -82,9 +83,9 @@ export default function Footer() {
                 </div>
               )}
               {tenant?.email && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: 'rgba(255,255,255,0.75)' }}>
-                  <Mail size={14} color="var(--gold)" />
-                  {tenant.email}
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', color: 'rgba(255,255,255,0.75)', minWidth: 0 }}>
+                  <Mail size={14} color="var(--gold)" style={{ marginTop: '2px', flexShrink: 0 }} />
+                  <span style={{ overflowWrap: 'anywhere', wordBreak: 'break-word', minWidth: 0 }}>{tenant.email}</span>
                 </div>
               )}
               {tenant?.address && (
