@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import GlobalDropGuard from '@/components/GlobalDropGuard'
 
 export const metadata: Metadata = {
   title: 'Travel Platform',
@@ -13,7 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <GlobalDropGuard />
+        {children}
+      </body>
     </html>
   )
 }
