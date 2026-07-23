@@ -3,6 +3,7 @@ namespace TravelPlatform.API.DTOs.Tenant
     public class UpdateTenantDto
     {
         public string? Name { get; set; }
+        public string? Status { get; set; }
         public string? CustomDomain { get; set; }
         public string? LogoUrl { get; set; }
         public string? FaviconUrl { get; set; }

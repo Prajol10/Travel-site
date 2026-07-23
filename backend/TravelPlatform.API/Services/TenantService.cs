@@ -84,6 +84,12 @@ namespace TravelPlatform.API.Services
                 ?? throw new KeyNotFoundException("Tenant not found");
 
             if (dto.Name != null) tenant.Name = dto.Name;
+            if (dto.Status != null)
+            {
+                if (!Enum.TryParse<TenantStatus>(dto.Status, true, out var parsedStatus))
+                    throw new ArgumentException($"Invalid status: {dto.Status}");
+                tenant.Status = parsedStatus;
+            }
             if (dto.CustomDomain != null) tenant.CustomDomain = dto.CustomDomain;
             if (dto.LogoUrl != null) tenant.LogoUrl = dto.LogoUrl;
             if (dto.FaviconUrl != null) tenant.FaviconUrl = dto.FaviconUrl;

@@ -181,6 +181,7 @@ export default function TenantForm({ initial, tenantId }: { initial: TenantFormD
       if (tenantId) {
         const payload = {
           name: form.name,
+          status: form.status,
           customDomain: form.customDomain || null,
           logoUrl: form.logoUrl || null,
           faviconUrl: form.faviconUrl || null,
