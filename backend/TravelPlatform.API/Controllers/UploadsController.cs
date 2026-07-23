@@ -34,20 +34,31 @@ namespace TravelPlatform.API.Controllers
             if (isVideo && file.Length > 50_000_000)
                 return BadRequest(new { success = false, message = "Video files must be under 50MB" });
 
-            Guid resolvedTenantId;
-            if (User.IsInRole("SuperAdmin") && !string.IsNullOrWhiteSpace(tenantId))
+            string folderPath;
+            if (User.IsInRole("SuperAdmin"))
             {
-                if (!Guid.TryParse(tenantId, out resolvedTenantId))
-                    return BadRequest(new { success = false, message = "Invalid tenantId" });
+                if (!string.IsNullOrWhiteSpace(tenantId))
+                {
+                    if (!Guid.TryParse(tenantId, out var resolvedTenantId))
+                        return BadRequest(new { success = false, message = "Invalid tenantId" });
+                    folderPath = string.IsNullOrWhiteSpace(folder)
+                        ? $"{resolvedTenantId}/general"
+                        : $"{resolvedTenantId}/{folder.Trim('/')}";
+                }
+                else
+                {
+                    folderPath = string.IsNullOrWhiteSpace(folder)
+                        ? "superadmin-pending/general"
+                        : $"superadmin-pending/{folder.Trim('/')}";
+                }
             }
             else
             {
-                resolvedTenantId = GetTenantId();
+                var resolvedTenantId = GetTenantId();
+                folderPath = string.IsNullOrWhiteSpace(folder)
+                    ? $"{resolvedTenantId}/general"
+                    : $"{resolvedTenantId}/{folder.Trim('/')}";
             }
-
-            var folderPath = string.IsNullOrWhiteSpace(folder)
-                ? $"{resolvedTenantId}/general"
-                : $"{resolvedTenantId}/{folder.Trim('/')}";
 
             var url = await _storage.UploadAsync(file, folderPath);
             return Ok(new { success = true, data = new { url } });
