@@ -105,7 +105,7 @@ export default function Footer() {
                 const [label, href] = item.split('|')
                 return (
                   <li key={label}>
-                    <FooterLink href={href}>{label}</FooterLink>
+                    <FooterLink href={tenantUrl(tenant?.subdomain, href)}>{label}</FooterLink>
                   </li>
                 )
               })}
