@@ -68,9 +68,9 @@ export default function PopularTours() {
         {tours.length === 0 ? (
           <div className="text-center text-gray-400">No tours in this category yet.</div>
         ) : (
-          <div className="flex flex-wrap justify-center gap-7">
+          <div className="grid gap-7" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', justifyItems: 'center' }}>
             {tours.map((tour) => (
-              <a key={tour.id} href={tenantUrl(tenant?.subdomain, `/tours/${tour.slug}`)} className="tour-card block" style={{ width: '280px', flex: '0 1 280px' }}>
+              <a key={tour.id} href={tenantUrl(tenant?.subdomain, `/tours/${tour.slug}`)} className="tour-card block" style={{ width: '100%', maxWidth: '320px' }}>
                 <div className="relative h-56 overflow-hidden">
                   {tour.coverImageUrl ? (
                     <img

@@ -67,7 +67,7 @@ export default function Testimonials() {
 
           <div className="flex flex-wrap justify-center gap-7">
             {visible.map((t) => (
-              <div key={t.id} className="card p-8 flex flex-col" style={{ width: '400px', flex: '0 1 400px', height: '360px' }}>
+              <div key={t.id} className="card p-8" style={{ width: '400px', flex: '0 1 400px' }}>
                 <div className="flex items-center justify-between mb-5">
                   <div className="stars">
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -82,13 +82,10 @@ export default function Testimonials() {
                     <span className="text-xs text-gray-400 font-medium">{t.sourcePlatform}</span>
                   )}
                 </div>
-                <p
-                  className="text-gray-600 leading-relaxed mb-6 text-sm"
-                  style={{ display: '-webkit-box', WebkitLineClamp: 6, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
-                >
+                <p className="text-gray-600 leading-relaxed mb-6 text-sm">
                   "{t.reviewText}"
                 </p>
-                <div className="flex items-center gap-3 pt-5 border-t border-gray-100" style={{ marginTop: 'auto' }}>
+                <div className="flex items-center gap-3 pt-5 border-t border-gray-100">
                   <div className="w-11 h-11 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
                     {t.authorPhotoUrl ? (
                       <img src={t.authorPhotoUrl} alt={t.authorName} className="w-full h-full object-cover" />
