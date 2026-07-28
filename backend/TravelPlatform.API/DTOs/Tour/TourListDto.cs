@@ -6,6 +6,7 @@ namespace TravelPlatform.API.DTOs.Tour
         public string Title { get; set; } = string.Empty;
         public string Slug { get; set; } = string.Empty;
         public string? ShortDescription { get; set; }
+        public string? Location { get; set; }
         public string? CoverImageUrl { get; set; }
         public int DurationDays { get; set; }
         public int DurationNights { get; set; }

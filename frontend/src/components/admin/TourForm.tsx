@@ -23,6 +23,7 @@ interface TourFormData {
   title: string
   slug: string
   shortDescription: string
+  location: string
   fullDescription: string
   durationDays: number
   durationNights: number
@@ -91,6 +92,7 @@ export function initTourForm(tour?: any): TourFormData {
     title: tour?.title || '',
     slug: tour?.slug || '',
     shortDescription: tour?.shortDescription || '',
+    location: tour?.location || '',
     fullDescription: tour?.fullDescription || '',
     durationDays: tour?.durationDays ?? 1,
     durationNights: tour?.durationNights ?? 0,
@@ -240,6 +242,7 @@ export default function TourForm({ initial, tourId }: { initial: TourFormData; t
     const payload = {
       title: form.title,
       shortDescription: form.shortDescription,
+      location: form.location,
       fullDescription: form.fullDescription,
       highlights: JSON.stringify(form.highlightsList.filter(Boolean)),
       itinerary: JSON.stringify(form.itineraryList),
@@ -380,6 +383,10 @@ export default function TourForm({ initial, tourId }: { initial: TourFormData; t
         <div style={{ marginBottom: '1rem' }}>
           <label style={labelStyle}>Short Description</label>
           <textarea value={form.shortDescription} onChange={(e) => update({ shortDescription: e.target.value })} style={{ ...inputStyle, minHeight: '70px' }} />
+        </div>
+        <div style={{ marginBottom: '1.25rem' }}>
+          <label style={labelStyle}>Location</label>
+          <input value={form.location} onChange={(e) => update({ location: e.target.value })} placeholder="e.g. Everest Region, Nepal" style={inputStyle} />
         </div>
         <div style={{ marginBottom: '1.25rem' }}>
           <label style={labelStyle}>Full Description</label>

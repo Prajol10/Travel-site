@@ -34,6 +34,7 @@ export interface TourPackage {
   title: string
   slug: string
   shortDescription?: string
+  location?: string
   fullDescription?: string
   highlights?: string
   itinerary?: string
@@ -64,6 +65,7 @@ export interface TourListDto {
   title: string
   slug: string
   shortDescription?: string
+  location?: string
   coverImageUrl?: string
   durationDays: number
   durationNights: number

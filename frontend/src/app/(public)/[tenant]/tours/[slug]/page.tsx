@@ -229,7 +229,7 @@ export default function TourDetailPage() {
   const knowBefore = parseList(tour.knowBeforeYouGo)
   const faqs = parseFaqs(tour.faqs)
   const videoEmbedUrl = getYouTubeEmbedUrl(tour.videoUrl)
-  const mapQuery = encodeURIComponent(`${tour.title} ${tenant?.address || ''}`)
+  const mapQuery = encodeURIComponent(`${tour.title} ${tour.location || tenant?.address || ''}`)
 
   return (
     <>
@@ -476,9 +476,9 @@ export default function TourDetailPage() {
                   {'★'.repeat(Math.round(tour.rating))}{'☆'.repeat(5 - Math.round(tour.rating))}
                 </div>
               )}
-              {tenant?.address && (
+              {(tour.location || tenant?.address) && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--gray-500)', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
-                  <MapPin size={14} /> {tenant.address}
+                  <MapPin size={14} /> {tour.location || tenant?.address}
                 </div>
               )}
 

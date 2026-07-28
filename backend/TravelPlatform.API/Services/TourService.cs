@@ -34,6 +34,7 @@ namespace TravelPlatform.API.Services
                     Title = t.Title,
                     Slug = t.Slug,
                     ShortDescription = t.ShortDescription,
+                    Location = t.Location,
                     CoverImageUrl = t.CoverImageUrl,
                     DurationDays = t.DurationDays,
                     DurationNights = t.DurationNights,
@@ -85,6 +86,7 @@ namespace TravelPlatform.API.Services
                 Title = dto.Title,
                 Slug = slug,
                 ShortDescription = dto.ShortDescription,
+                Location = dto.Location,
                 FullDescription = dto.FullDescription,
                 Highlights = dto.Highlights,
                 Itinerary = dto.Itinerary,
@@ -124,6 +126,7 @@ namespace TravelPlatform.API.Services
             if (dto.Title != null) tour.Title = dto.Title;
             if (dto.CategoryId.HasValue) tour.CategoryId = dto.CategoryId;
             if (dto.ShortDescription != null) tour.ShortDescription = dto.ShortDescription;
+            if (dto.Location != null) tour.Location = dto.Location;
             if (dto.FullDescription != null) tour.FullDescription = dto.FullDescription;
             if (dto.Highlights != null) tour.Highlights = dto.Highlights;
             if (dto.Itinerary != null) tour.Itinerary = dto.Itinerary;
@@ -173,6 +176,7 @@ namespace TravelPlatform.API.Services
             Title = t.Title,
             Slug = t.Slug,
             ShortDescription = t.ShortDescription,
+            Location = t.Location,
             FullDescription = t.FullDescription,
             Highlights = t.Highlights,
             Itinerary = t.Itinerary,

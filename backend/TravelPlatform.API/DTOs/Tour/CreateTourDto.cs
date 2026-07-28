@@ -9,6 +9,7 @@ namespace TravelPlatform.API.DTOs.Tour
 
         public Guid? CategoryId { get; set; }
         public string? ShortDescription { get; set; }
+        public string? Location { get; set; }
         public string? FullDescription { get; set; }
         public string? Highlights { get; set; }
         public string? Itinerary { get; set; }
