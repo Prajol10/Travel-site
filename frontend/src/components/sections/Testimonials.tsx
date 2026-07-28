@@ -67,7 +67,7 @@ export default function Testimonials() {
 
           <div className="flex flex-wrap justify-center gap-7">
             {visible.map((t) => (
-              <div key={t.id} className="card p-8 flex flex-col" style={{ width: '400px', flex: '0 1 400px', height: '460px' }}>
+              <div key={t.id} className="card p-8 flex flex-col" style={{ width: '400px', flex: '0 1 400px', height: '360px' }}>
                 <div className="flex items-center justify-between mb-5">
                   <div className="stars">
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -84,7 +84,7 @@ export default function Testimonials() {
                 </div>
                 <p
                   className="text-gray-600 leading-relaxed mb-6 text-sm"
-                  style={{ display: '-webkit-box', WebkitLineClamp: 9, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+                  style={{ display: '-webkit-box', WebkitLineClamp: 6, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
                 >
                   "{t.reviewText}"
                 </p>
