@@ -45,9 +45,12 @@ export default function AboutPage() {
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2.5rem', fontWeight: 700, color: 'var(--navy)', marginBottom: '1.5rem' }}>
                 {section?.title || 'Journey with Passion & Experience'}
               </h2>
-              <p style={{ color: 'var(--gray-600)', lineHeight: 1.8, marginBottom: '1.5rem', fontSize: '1.05rem' }}>
-                {section?.body || 'We have been guiding travelers to sacred and breathtaking destinations for years, committed to providing safe, enriching, and memorable travel experiences.'}
-              </p>
+              <div
+                style={{ color: 'var(--gray-600)', lineHeight: 1.8, marginBottom: '1.5rem', fontSize: '1.05rem' }}
+                dangerouslySetInnerHTML={{
+                  __html: section?.body || 'We have been guiding travelers to sacred and breathtaking destinations for years, committed to providing safe, enriching, and memorable travel experiences.',
+                }}
+              />
               <div style={{ display: 'flex', gap: '2rem', marginBottom: '2rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <Award size={28} color="var(--gold)" strokeWidth={1.5} />
