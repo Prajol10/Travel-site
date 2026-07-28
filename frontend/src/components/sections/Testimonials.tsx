@@ -65,7 +65,7 @@ export default function Testimonials() {
             </>
           )}
 
-          <div className="flex flex-wrap justify-center gap-7">
+          <div className="flex flex-wrap justify-center items-start gap-7">
             {visible.map((t) => (
               <div key={t.id} className="card p-7" style={{ width: '350px', flex: '0 1 350px' }}>
                 <div className="flex items-center justify-between mb-5">
