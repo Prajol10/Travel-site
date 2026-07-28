@@ -65,9 +65,9 @@ export default function Testimonials() {
             </>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+          <div className="flex flex-wrap justify-center gap-7">
             {visible.map((t) => (
-              <div key={t.id} className="card p-7">
+              <div key={t.id} className="card p-7" style={{ width: '350px', flex: '0 1 350px' }}>
                 <div className="flex items-center justify-between mb-5">
                   <div className="stars">
                     {Array.from({ length: 5 }).map((_, i) => (
