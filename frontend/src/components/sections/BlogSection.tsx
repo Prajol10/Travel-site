@@ -22,9 +22,9 @@ export default function BlogSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+        <div className="grid gap-7" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', justifyItems: 'center' }}>
           {posts.map((post) => (
-            <a key={post.id} href={tenantUrl(tenant?.subdomain, `/blog/${post.slug}`)} className="card block">
+            <a key={post.id} href={tenantUrl(tenant?.subdomain, `/blog/${post.slug}`)} className="card block" style={{ width: '100%', maxWidth: '380px' }}>
               <div className="h-52 overflow-hidden">
                 {post.coverImageUrl ? (
                   <img

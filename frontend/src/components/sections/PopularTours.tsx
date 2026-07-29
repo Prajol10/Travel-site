@@ -42,7 +42,7 @@ export default function PopularTours() {
         </div>
 
         {tabs.length > 1 && (
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '2rem', marginBottom: '3rem', borderBottom: '1px solid #E5E1D8' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'centre', gap: '2rem', marginBottom: '3rem', borderBottom: '1px solid #E5E1D8' }}>
             {tabs.map((tab) => (
               <button
                 key={tab}
