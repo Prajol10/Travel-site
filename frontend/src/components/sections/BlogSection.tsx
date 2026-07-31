@@ -15,7 +15,7 @@ export default function BlogSection() {
         <div className="text-center mb-10">
           <div className="section-label justify-center mb-5">Travel Insights</div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-5">Latest from Our Blog</h2>
-          <p className="text-gray-500" style={{ maxWidth: '34rem', margin: '0 auto', textAlign: 'center' }}>
+          <p className="text-gray-500" style={{ maxWidth: '650px', margin: '0 auto', textAlign: 'center' }}>
             Expert tips, travel guides, and stories to help you plan your perfect adventure
           </p>
         </div>
@@ -24,19 +24,31 @@ export default function BlogSection() {
             <Link
               key={post.id}
               href={tenantUrl(tenant?.subdomain, `/blog/${post.slug}`)}
-              className="card block flex flex-col"
-              style={{ width: '480px', flex: '0 1 480px', transition: 'transform 0.25s ease, box-shadow 0.25s ease', overflow: 'hidden' }}
+              className="block flex flex-col"
+              style={{
+                width: 'min(620px, 92vw)',
+                flex: '0 1 min(620px, 92vw)',
+                overflow: 'hidden',
+                borderRadius: '20px',
+                background: '#ffffff',
+                boxShadow: '0 8px 30px rgba(27, 43, 75, 0.08)',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+              }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-4px)'
-                e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.08)'
+                e.currentTarget.style.transform = 'translateY(-6px)'
+                e.currentTarget.style.boxShadow = '0 24px 48px rgba(27, 43, 75, 0.14)'
                 const img = e.currentTarget.querySelector('img') as HTMLImageElement | null
                 if (img) img.style.transform = 'scale(1.05)'
+                const arrow = e.currentTarget.querySelector('.read-more-arrow') as HTMLElement | null
+                if (arrow) arrow.style.transform = 'translateX(4px)'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = ''
+                e.currentTarget.style.boxShadow = '0 8px 30px rgba(27, 43, 75, 0.08)'
                 const img = e.currentTarget.querySelector('img') as HTMLImageElement | null
                 if (img) img.style.transform = 'scale(1)'
+                const arrow = e.currentTarget.querySelector('.read-more-arrow') as HTMLElement | null
+                if (arrow) arrow.style.transform = 'translateX(0)'
               }}
             >
               <div className="overflow-hidden" style={{ aspectRatio: '16 / 9' }}>
@@ -51,29 +63,30 @@ export default function BlogSection() {
                   <div className="w-full h-full" style={{ background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }} />
                 )}
               </div>
-              <div className="p-10 flex-1 flex flex-col">
-                <div className="flex items-center gap-2 mb-5" style={{ fontSize: '0.75rem' }}>
+              <div className="p-11 flex-1 flex flex-col">
+                <div className="flex items-center gap-2 mb-6" style={{ fontSize: '0.8rem' }}>
                   <span className="text-gold font-semibold">{post.category || 'Travel Tips'}</span>
                   <span className="text-gray-300">•</span>
-                  <span className="text-gray-400">{formatDate(post.publishedAt || post.createdAt)}</span>
+                  <span style={{ color: '#B0B7C3' }}>{formatDate(post.publishedAt || post.createdAt)}</span>
                 </div>
-                <h3 className="font-serif font-bold text-2xl text-navy mb-5 leading-snug line-clamp-2">
+                <h3 className="font-serif font-bold text-navy leading-snug line-clamp-2 mb-6" style={{ fontSize: '1.75rem' }}>
                   {post.title}
                 </h3>
                 {post.excerpt && (
-                  <p className="text-gray-500 text-sm mb-7 line-clamp-2" style={{ lineHeight: 1.7 }}>{post.excerpt}</p>
+                  <p className="text-gray-400 text-base mb-8 line-clamp-3" style={{ lineHeight: 1.75 }}>{post.excerpt}</p>
                 )}
                 <div
                   className="flex items-center gap-1.5 text-gold font-semibold text-sm"
-                  style={{ marginTop: 'auto', transition: 'gap 0.2s ease' }}
+                  style={{ marginTop: 'auto' }}
                 >
-                  Read More <ArrowRight size={14} />
+                  Read More
+                  <ArrowRight size={14} className="read-more-arrow" style={{ transition: 'transform 0.25s ease' }} />
                 </div>
               </div>
             </Link>
           ))}
         </div>
-        <div className="text-center mt-24">
+        <div className="text-center" style={{ marginTop: '36px' }}>
           <Link href={tenantUrl(tenant?.subdomain, '/blog')} className="btn-outline-gold">
             View All Articles
           </Link>
