@@ -12,18 +12,26 @@ function TestimonialCard({ t }: { t: any }) {
 
   return (
     <div
-      className="card p-10 flex flex-col h-full"
-      style={{ transition: 'transform 0.25s ease, box-shadow 0.25s ease' }}
+      className="flex flex-col h-full"
+      style={{
+        padding: '3rem',
+        minHeight: '460px',
+        borderRadius: '18px',
+        background: '#ffffff',
+        border: '1px solid #EFEBE2',
+        boxShadow: '0 10px 30px rgba(27, 43, 75, 0.07)',
+        transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+      }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'translateY(-4px)'
-        e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.08)'
+        e.currentTarget.style.boxShadow = '0 22px 44px rgba(27, 43, 75, 0.12)'
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = 'translateY(0)'
-        e.currentTarget.style.boxShadow = ''
+        e.currentTarget.style.boxShadow = '0 10px 30px rgba(27, 43, 75, 0.07)'
       }}
     >
-      <div className="flex items-center justify-between mb-7">
+      <div className="flex items-center justify-between mb-8">
         <div className="stars">
           {Array.from({ length: 5 }).map((_, i) => (
             <Star key={i} size={16} fill={i < Math.round(t.rating) ? 'currentColor' : 'none'} />
@@ -31,19 +39,19 @@ function TestimonialCard({ t }: { t: any }) {
         </div>
         {t.sourcePlatform && (
           <span
-            className="text-xs text-gray-500 font-medium"
-            style={{ background: '#F5F3EE', padding: '4px 12px', borderRadius: '999px' }}
+            className="text-xs font-semibold"
+            style={{ background: '#F5F3EE', color: '#8B93A3', padding: '5px 14px', borderRadius: '999px', letterSpacing: '0.02em' }}
           >
             {t.sourcePlatform}
           </span>
         )}
       </div>
 
-      <div className="flex-1 flex flex-col justify-center">
+      <div className="flex-1 flex flex-col justify-center" style={{ position: 'relative' }}>
         <p
           className="text-gray-600 text-base"
           style={{
-            lineHeight: 1.75,
+            lineHeight: 1.8,
             ...(expanded
               ? {}
               : { display: '-webkit-box', WebkitLineClamp: CLAMP_LINES, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden' }),
@@ -54,20 +62,20 @@ function TestimonialCard({ t }: { t: any }) {
         {isLong && (
           <button
             onClick={() => setExpanded(!expanded)}
-            style={{ color: 'var(--gold)', fontWeight: 600, fontSize: '0.85rem', marginTop: '0.75rem', background: 'none', border: 'none', cursor: 'pointer', padding: 0, alignSelf: 'flex-start' }}
+            style={{ color: 'var(--gold-dark)', fontWeight: 700, fontSize: '0.85rem', marginTop: '1rem', background: 'none', border: 'none', cursor: 'pointer', padding: 0, alignSelf: 'flex-start' }}
           >
             {expanded ? 'Show Less' : 'Read More'}
           </button>
         )}
       </div>
 
-      <div className="flex items-center gap-3 pt-7 mt-7 border-t border-gray-100">
-        <div className="w-11 h-11 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
+      <div className="flex items-center gap-3" style={{ paddingTop: '2rem', marginTop: '2rem', borderTop: '1px solid #F0EDE5' }}>
+        <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
           {t.authorPhotoUrl ? (
             <img src={t.authorPhotoUrl} alt={t.authorName} className="w-full h-full object-cover" />
           ) : (
             <div
-              className="w-full h-full flex items-center justify-center font-bold"
+              className="w-full h-full flex items-center justify-center font-bold text-sm"
               style={{ background: 'var(--navy)', color: 'var(--gold)' }}
             >
               {t.authorName.charAt(0)}
@@ -76,7 +84,7 @@ function TestimonialCard({ t }: { t: any }) {
         </div>
         <div>
           <div className="font-semibold text-navy text-sm">{t.authorName}</div>
-          <div className="text-xs text-gray-400">
+          <div className="text-xs" style={{ color: '#9AA1AF' }}>
             {t.authorLocation} {t.tourName ? `· ${t.tourName}` : ''}
           </div>
         </div>
@@ -146,11 +154,17 @@ export default function Testimonials() {
           )}
 
           <div
-            className="grid gap-8"
-            style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 440px))', justifyContent: 'center', alignItems: 'stretch' }}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+              gap: '32px',
+              alignItems: 'stretch',
+            }}
           >
             {visible.map((t) => (
-              <TestimonialCard key={t.id} t={t} />
+              <div key={t.id} style={{ maxWidth: '460px', width: '100%', margin: '0 auto' }}>
+                <TestimonialCard t={t} />
+              </div>
             ))}
           </div>
         </div>
