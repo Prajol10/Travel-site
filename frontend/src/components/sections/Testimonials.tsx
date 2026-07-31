@@ -11,8 +11,8 @@ function TestimonialCard({ t }: { t: any }) {
   const isLong = (t.reviewText || '').length > 220
 
   return (
-    <div className="card p-10">
-      <div className="flex items-center justify-between mb-8">
+    <div className="card p-12">
+      <div className="flex items-center gap-3 mb-10">
         <div className="stars">
           {Array.from({ length: 5 }).map((_, i) => (
             <Star key={i} size={16} fill={i < Math.round(t.rating) ? 'currentColor' : 'none'} />
@@ -47,7 +47,7 @@ function TestimonialCard({ t }: { t: any }) {
         </button>
       )}
 
-      <div className="flex items-center gap-3 pt-6 mt-6 border-t border-gray-100">
+      <div className="flex items-center gap-3 pt-8 mt-8 border-t border-gray-100">
         <div className="w-11 h-11 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
           {t.authorPhotoUrl ? (
             <img src={t.authorPhotoUrl} alt={t.authorName} className="w-full h-full object-cover" />
@@ -132,8 +132,8 @@ export default function Testimonials() {
           )}
 
           <div
-            className="grid gap-7"
-            style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(460px, 540px))', justifyContent: 'center', alignItems: 'start' }}
+            className="grid gap-10"
+            style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 560px))', justifyContent: 'center', alignItems: 'start' }}
           >
             {visible.map((t) => (
               <TestimonialCard key={t.id} t={t} />

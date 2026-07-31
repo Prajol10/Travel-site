@@ -13,13 +13,13 @@ export default function BlogSection() {
         <div className="text-center mb-14">
           <div className="section-label justify-center mb-5">Travel Insights</div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">Latest from Our Blog</h2>
-          <p className="text-gray-500 max-w-xl mx-auto" style={{ textAlign: 'center' }}>
+          <p className="text-gray-500 max-w-md mx-auto" style={{ textAlign: 'center' }}>
             Expert tips, travel guides, and stories to help you plan your perfect adventure
           </p>
         </div>
         <div className="flex flex-wrap justify-center items-start gap-7">
           {posts.map((post) => (
-            <a key={post.id} href={tenantUrl(tenant?.subdomain, `/blog/${post.slug}`)} className="card block" style={{ width: '480px', flex: '0 1 480px' }}>
+            <a key={post.id} href={tenantUrl(tenant?.subdomain, `/blog/${post.slug}`)} className="card block" style={{ width: '560px', flex: '0 1 560px' }}>
               <div className="h-52 overflow-hidden">
                 {post.coverImageUrl ? (
                   <img
@@ -31,7 +31,7 @@ export default function BlogSection() {
                   <div className="w-full h-full" style={{ background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }} />
                 )}
               </div>
-              <div className="p-7">
+              <div className="p-9">
                 <div className="flex items-center gap-2 text-xs mb-6">
                   <span className="text-gold font-semibold">{post.category || 'Travel Tips'}</span>
                   <span className="text-gray-300">•</span>
@@ -50,7 +50,7 @@ export default function BlogSection() {
             </a>
           ))}
         </div>
-        <div className="text-center mt-20">
+        <div className="text-center mt-24">
           <a href={tenantUrl(tenant?.subdomain, '/blog')} className="btn-outline-gold">
             View All Articles
           </a>
