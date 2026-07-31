@@ -4,6 +4,69 @@ import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useTenant } from '@/context/TenantContext'
 
 const PER_PAGE = 3
+const CLAMP_LINES = 5
+
+function TestimonialCard({ t }: { t: any }) {
+  const [expanded, setExpanded] = useState(false)
+  const isLong = (t.reviewText || '').length > 220
+
+  return (
+    <div className="card p-8 flex flex-col" style={{ minHeight: '340px' }}>
+      <div className="flex items-center justify-between mb-6">
+        <div className="stars">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star key={i} size={16} fill={i < Math.round(t.rating) ? 'currentColor' : 'none'} />
+          ))}
+        </div>
+        {t.sourcePlatform && (
+          <span className="text-xs text-gray-400 font-medium">{t.sourcePlatform}</span>
+        )}
+      </div>
+
+      <div className="flex-1">
+        <p
+          className="text-gray-600 leading-relaxed text-sm"
+          style={
+            expanded
+              ? {}
+              : { display: '-webkit-box', WebkitLineClamp: CLAMP_LINES, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden' }
+          }
+        >
+          "{t.reviewText}"
+        </p>
+        {isLong && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            style={{ color: 'var(--gold)', fontWeight: 600, fontSize: '0.8rem', marginTop: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+          >
+            {expanded ? 'Show Less' : 'Read More'}
+          </button>
+        )}
+      </div>
+
+      <div className="flex items-center gap-3 pt-6 mt-6 border-t border-gray-100">
+        <div className="w-11 h-11 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
+          {t.authorPhotoUrl ? (
+            <img src={t.authorPhotoUrl} alt={t.authorName} className="w-full h-full object-cover" />
+          ) : (
+            <div
+              className="w-full h-full flex items-center justify-center font-bold"
+              style={{ background: 'var(--navy)', color: 'var(--gold)' }}
+            >
+              {t.authorName.charAt(0)}
+            </div>
+          )}
+        </div>
+        <div>
+          <div className="font-semibold text-navy text-sm">{t.authorName}</div>
+          <div className="text-xs text-gray-400">
+            {t.authorLocation} {t.tourName ? `· ${t.tourName}` : ''}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function Testimonials() {
   const { data } = useTenant()
@@ -65,44 +128,12 @@ export default function Testimonials() {
             </>
           )}
 
-          <div className="grid gap-7" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', alignItems: 'start' }}>
+          <div
+            className="grid gap-7"
+            style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 380px))', justifyContent: 'center' }}
+          >
             {visible.map((t) => (
-              <div key={t.id} className="card p-8">
-                <div className="flex items-center justify-between mb-5">
-                  <div className="stars">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        size={16}
-                        fill={i < Math.round(t.rating) ? 'currentColor' : 'none'}
-                      />
-                    ))}
-                  </div>
-                  {t.sourcePlatform && (
-                    <span className="text-xs text-gray-400 font-medium">{t.sourcePlatform}</span>
-                  )}
-                </div>
-                <p className="text-gray-600 leading-relaxed mb-6 text-sm">
-                  "{t.reviewText}"
-                </p>
-                <div className="flex items-center gap-3 pt-5 border-t border-gray-100">
-                  <div className="w-11 h-11 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
-                    {t.authorPhotoUrl ? (
-                      <img src={t.authorPhotoUrl} alt={t.authorName} className="w-full h-full object-cover" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gold-pale text-gold font-bold">
-                        {t.authorName.charAt(0)}
-                      </div>
-                    )}
-                  </div>
-                  <div>
-                    <div className="font-semibold text-navy text-sm">{t.authorName}</div>
-                    <div className="text-xs text-gray-400">
-                      {t.authorLocation} {t.tourName ? `· ${t.tourName}` : ''}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <TestimonialCard key={t.id} t={t} />
             ))}
           </div>
         </div>

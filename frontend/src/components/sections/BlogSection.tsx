@@ -1,16 +1,12 @@
 'use client'
-
 import { ArrowRight } from 'lucide-react'
 import { useTenant } from '@/context/TenantContext'
 import { tenantUrl } from '@/lib/utils'
 import { formatDate } from '@/lib/utils'
-
 export default function BlogSection() {
   const { data, tenant } = useTenant()
   const posts = data?.blogs?.slice(0, 3) || []
-
   if (posts.length === 0) return null
-
   return (
     <section className="section" style={{ background: '#FAF9F6' }}>
       <div className="container">
@@ -21,10 +17,9 @@ export default function BlogSection() {
             Expert tips, travel guides, and stories to help you plan your perfect adventure
           </p>
         </div>
-
-        <div className="grid gap-7" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 320px))', justifyContent: 'start' }}>
+        <div className="grid gap-7" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 360px))', justifyContent: 'center' }}>
           {posts.map((post) => (
-            <a key={post.id} href={tenantUrl(tenant?.subdomain, `/blog/${post.slug}`)} className="card block" style={{ width: '100%' }}>
+            <a key={post.id} href={tenantUrl(tenant?.subdomain, `/blog/${post.slug}`)} className="card block">
               <div className="h-52 overflow-hidden">
                 {post.coverImageUrl ? (
                   <img
@@ -36,17 +31,17 @@ export default function BlogSection() {
                   <div className="w-full h-full" style={{ background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }} />
                 )}
               </div>
-              <div className="p-6">
-                <div className="flex items-center gap-2 text-xs mb-3">
+              <div className="p-7">
+                <div className="flex items-center gap-2 text-xs mb-4">
                   <span className="text-gold font-semibold">{post.category || 'Travel Tips'}</span>
                   <span className="text-gray-300">•</span>
                   <span className="text-gray-400">{formatDate(post.publishedAt || post.createdAt)}</span>
                 </div>
-                <h3 className="font-serif font-bold text-lg text-navy mb-3 leading-snug line-clamp-2">
+                <h3 className="font-serif font-bold text-lg text-navy mb-4 leading-snug line-clamp-2">
                   {post.title}
                 </h3>
                 {post.excerpt && (
-                  <p className="text-gray-500 text-sm mb-4 line-clamp-2">{post.excerpt}</p>
+                  <p className="text-gray-500 text-sm mb-5 leading-relaxed line-clamp-3">{post.excerpt}</p>
                 )}
                 <div className="flex items-center gap-1.5 text-gold font-semibold text-sm">
                   Read More <ArrowRight size={14} />
@@ -55,7 +50,6 @@ export default function BlogSection() {
             </a>
           ))}
         </div>
-
         <div className="text-center mt-14">
           <a href={tenantUrl(tenant?.subdomain, '/blog')} className="btn-outline-gold">
             View All Articles
