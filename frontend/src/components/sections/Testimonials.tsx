@@ -104,11 +104,11 @@ export default function Testimonials() {
 
   return (
     <section className="section bg-white">
-      <div className="container" style={{ maxWidth: '1400px' }}>
-        <div className="text-center mb-14">
+      <div className="container">
+        <div className="text-center mb-10">
           <div className="section-label justify-center mb-5">Testimonials</div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-5">What Our Travelers Say</h2>
-          <p className="text-gray-500 max-w-xl mx-auto">
+          <p className="text-gray-500" style={{ maxWidth: '32rem', margin: '0 auto', textAlign: 'center' }}>
             Real experiences from travelers who journeyed with us
           </p>
         </div>
