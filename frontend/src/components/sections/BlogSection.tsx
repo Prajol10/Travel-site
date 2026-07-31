@@ -19,7 +19,7 @@ export default function BlogSection() {
         </div>
         <div className="flex flex-wrap justify-center items-start gap-7">
           {posts.map((post) => (
-            <a key={post.id} href={tenantUrl(tenant?.subdomain, `/blog/${post.slug}`)} className="card block" style={{ width: '360px', flex: '0 1 360px' }}>
+            <a key={post.id} href={tenantUrl(tenant?.subdomain, `/blog/${post.slug}`)} className="card block" style={{ width: '480px', flex: '0 1 480px' }}>
               <div className="h-52 overflow-hidden">
                 {post.coverImageUrl ? (
                   <img
@@ -32,16 +32,16 @@ export default function BlogSection() {
                 )}
               </div>
               <div className="p-7">
-                <div className="flex items-center gap-2 text-xs mb-5">
+                <div className="flex items-center gap-2 text-xs mb-6">
                   <span className="text-gold font-semibold">{post.category || 'Travel Tips'}</span>
                   <span className="text-gray-300">•</span>
                   <span className="text-gray-400">{formatDate(post.publishedAt || post.createdAt)}</span>
                 </div>
-                <h3 className="font-serif font-bold text-lg text-navy mb-4 leading-snug line-clamp-2">
+                <h3 className="font-serif font-bold text-xl text-navy mb-5 leading-snug line-clamp-2">
                   {post.title}
                 </h3>
                 {post.excerpt && (
-                  <p className="text-gray-500 text-sm mb-6 leading-relaxed line-clamp-3">{post.excerpt}</p>
+                  <p className="text-gray-500 text-sm mb-7 leading-relaxed line-clamp-3">{post.excerpt}</p>
                 )}
                 <div className="flex items-center gap-1.5 text-gold font-semibold text-sm">
                   Read More <ArrowRight size={14} />
@@ -50,7 +50,7 @@ export default function BlogSection() {
             </a>
           ))}
         </div>
-        <div className="text-center mt-16">
+        <div className="text-center mt-20">
           <a href={tenantUrl(tenant?.subdomain, '/blog')} className="btn-outline-gold">
             View All Articles
           </a>
