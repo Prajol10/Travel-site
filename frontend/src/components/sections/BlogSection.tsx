@@ -35,7 +35,7 @@ export default function BlogSection() {
               className="flex flex-col"
               style={{
                 width: '100%',
-                maxWidth: '860px',
+                maxWidth: '740px',
                 margin: '0 auto',
                 overflow: 'hidden',
                 borderRadius: '20px',
@@ -72,17 +72,38 @@ export default function BlogSection() {
                   <div className="w-full h-full" style={{ background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }} />
                 )}
               </div>
-              <div className="p-9 flex-1 flex flex-col">
+              <div className="p-7 flex-1 flex flex-col">
                 <div className="flex items-center gap-2 mb-5" style={{ fontSize: '0.8rem' }}>
                   <span className="text-gold font-semibold">{post.category || 'Travel Tips'}</span>
                   <span className="text-gray-300">•</span>
                   <span style={{ color: '#B0B7C3' }}>{formatDate(post.publishedAt || post.createdAt)}</span>
                 </div>
-                <h3 className="font-serif font-bold text-navy leading-snug line-clamp-2 mb-5" style={{ fontSize: '1.6rem' }}>
+                <h3
+                  className="font-serif font-bold text-navy mb-4"
+                  style={{
+                    fontSize: '1.4rem',
+                    lineHeight: 1.3,
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical' as const,
+                    overflow: 'hidden',
+                  }}
+                >
                   {post.title}
                 </h3>
                 {post.excerpt && (
-                  <p className="text-gray-400 text-sm mb-7 line-clamp-3" style={{ lineHeight: 1.7 }}>{post.excerpt}</p>
+                  <p
+                    className="text-gray-400 text-sm mb-6"
+                    style={{
+                      lineHeight: 1.7,
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical' as const,
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {post.excerpt}
+                  </p>
                 )}
                 <div
                   className="flex items-center gap-1.5 text-gold font-semibold text-sm"
