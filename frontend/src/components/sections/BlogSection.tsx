@@ -19,15 +19,24 @@ export default function BlogSection() {
             Expert tips, travel guides, and stories to help you plan your perfect adventure
           </p>
         </div>
-        <div className="flex flex-wrap justify-center items-stretch gap-9">
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+            gap: '32px',
+            alignItems: 'stretch',
+          }}
+        >
           {posts.map((post) => (
             <Link
               key={post.id}
               href={tenantUrl(tenant?.subdomain, `/blog/${post.slug}`)}
-              className="block flex flex-col"
+              className="flex flex-col"
               style={{
-                width: 'min(620px, 92vw)',
-                flex: '0 1 min(620px, 92vw)',
+                width: '100%',
+                maxWidth: '860px',
+                margin: '0 auto',
                 overflow: 'hidden',
                 borderRadius: '20px',
                 background: '#ffffff',
@@ -63,17 +72,17 @@ export default function BlogSection() {
                   <div className="w-full h-full" style={{ background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }} />
                 )}
               </div>
-              <div className="p-11 flex-1 flex flex-col">
-                <div className="flex items-center gap-2 mb-6" style={{ fontSize: '0.8rem' }}>
+              <div className="p-9 flex-1 flex flex-col">
+                <div className="flex items-center gap-2 mb-5" style={{ fontSize: '0.8rem' }}>
                   <span className="text-gold font-semibold">{post.category || 'Travel Tips'}</span>
                   <span className="text-gray-300">•</span>
                   <span style={{ color: '#B0B7C3' }}>{formatDate(post.publishedAt || post.createdAt)}</span>
                 </div>
-                <h3 className="font-serif font-bold text-navy leading-snug line-clamp-2 mb-6" style={{ fontSize: '1.75rem' }}>
+                <h3 className="font-serif font-bold text-navy leading-snug line-clamp-2 mb-5" style={{ fontSize: '1.6rem' }}>
                   {post.title}
                 </h3>
                 {post.excerpt && (
-                  <p className="text-gray-400 text-base mb-8 line-clamp-3" style={{ lineHeight: 1.75 }}>{post.excerpt}</p>
+                  <p className="text-gray-400 text-sm mb-7 line-clamp-3" style={{ lineHeight: 1.7 }}>{post.excerpt}</p>
                 )}
                 <div
                   className="flex items-center gap-1.5 text-gold font-semibold text-sm"
@@ -86,7 +95,8 @@ export default function BlogSection() {
             </Link>
           ))}
         </div>
-        <div className="text-center" style={{ marginTop: '36px' }}>
+
+        <div className="text-center" style={{ marginTop: '38px' }}>
           <Link href={tenantUrl(tenant?.subdomain, '/blog')} className="btn-outline-gold">
             View All Articles
           </Link>
