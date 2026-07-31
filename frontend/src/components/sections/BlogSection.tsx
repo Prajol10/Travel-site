@@ -12,8 +12,13 @@ export default function BlogSection() {
   return (
     <section className="section" style={{ background: '#FAF9F6' }}>
       <div className="container">
-        <div className="text-center mb-10">
-          <div className="section-label justify-center mb-5">Travel Insights</div>
+        <div className="text-center mb-8">
+          <div
+            className="section-label justify-center mb-5"
+            style={{ fontWeight: 700, letterSpacing: '0.2em', color: 'var(--gold-dark)' }}
+          >
+            Travel Insights
+          </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-5">Latest from Our Blog</h2>
           <p className="text-gray-500" style={{ maxWidth: '650px', margin: '0 auto', textAlign: 'center' }}>
             Expert tips, travel guides, and stories to help you plan your perfect adventure
@@ -32,7 +37,7 @@ export default function BlogSection() {
             <Link
               key={post.id}
               href={tenantUrl(tenant?.subdomain, `/blog/${post.slug}`)}
-              className="flex flex-col"
+              className="flex flex-col h-full"
               style={{
                 width: '100%',
                 maxWidth: '740px',
@@ -40,27 +45,28 @@ export default function BlogSection() {
                 overflow: 'hidden',
                 borderRadius: '20px',
                 background: '#ffffff',
-                boxShadow: '0 8px 30px rgba(27, 43, 75, 0.08)',
+                boxShadow: '0 10px 34px rgba(27, 43, 75, 0.10)',
+                border: '1px solid #EFEBE2',
                 transition: 'transform 0.3s ease, box-shadow 0.3s ease',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-6px)'
-                e.currentTarget.style.boxShadow = '0 24px 48px rgba(27, 43, 75, 0.14)'
+                e.currentTarget.style.boxShadow = '0 26px 50px rgba(27, 43, 75, 0.16)'
                 const img = e.currentTarget.querySelector('img') as HTMLImageElement | null
-                if (img) img.style.transform = 'scale(1.05)'
+                if (img) img.style.transform = 'scale(1.06)'
                 const arrow = e.currentTarget.querySelector('.read-more-arrow') as HTMLElement | null
                 if (arrow) arrow.style.transform = 'translateX(4px)'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 8px 30px rgba(27, 43, 75, 0.08)'
+                e.currentTarget.style.boxShadow = '0 10px 34px rgba(27, 43, 75, 0.10)'
                 const img = e.currentTarget.querySelector('img') as HTMLImageElement | null
                 if (img) img.style.transform = 'scale(1)'
                 const arrow = e.currentTarget.querySelector('.read-more-arrow') as HTMLElement | null
                 if (arrow) arrow.style.transform = 'translateX(0)'
               }}
             >
-              <div className="overflow-hidden" style={{ aspectRatio: '16 / 9' }}>
+              <div className="overflow-hidden flex-shrink-0" style={{ height: '240px' }}>
                 {post.coverImageUrl ? (
                   <img
                     src={post.coverImageUrl}
@@ -72,17 +78,24 @@ export default function BlogSection() {
                   <div className="w-full h-full" style={{ background: 'linear-gradient(135deg, var(--navy), #2c3e5c)' }} />
                 )}
               </div>
-              <div className="p-7 flex-1 flex flex-col">
-                <div className="flex items-center gap-2 mb-5" style={{ fontSize: '0.8rem' }}>
-                  <span className="text-gold font-semibold">{post.category || 'Travel Tips'}</span>
-                  <span className="text-gray-300">•</span>
-                  <span style={{ color: '#B0B7C3' }}>{formatDate(post.publishedAt || post.createdAt)}</span>
+              <div className="flex-1 flex flex-col" style={{ padding: '2rem 2rem 2.5rem' }}>
+                <div className="flex items-center gap-2 mb-6">
+                  <span
+                    className="font-bold"
+                    style={{ color: 'var(--gold-dark)', fontSize: '0.8rem', letterSpacing: '0.03em' }}
+                  >
+                    {post.category || 'Travel Tips'}
+                  </span>
+                  <span style={{ color: '#D8D2C4' }}>•</span>
+                  <span style={{ color: '#8B93A3', fontSize: '0.8rem' }}>
+                    {formatDate(post.publishedAt || post.createdAt)}
+                  </span>
                 </div>
                 <h3
                   className="font-serif font-bold text-navy mb-4"
                   style={{
                     fontSize: '1.4rem',
-                    lineHeight: 1.3,
+                    lineHeight: 1.35,
                     display: '-webkit-box',
                     WebkitLineClamp: 2,
                     WebkitBoxOrient: 'vertical' as const,
@@ -93,9 +106,9 @@ export default function BlogSection() {
                 </h3>
                 {post.excerpt && (
                   <p
-                    className="text-gray-400 text-sm mb-6"
+                    className="text-gray-500 text-sm mb-7"
                     style={{
-                      lineHeight: 1.7,
+                      lineHeight: 1.75,
                       display: '-webkit-box',
                       WebkitLineClamp: 2,
                       WebkitBoxOrient: 'vertical' as const,
@@ -106,8 +119,8 @@ export default function BlogSection() {
                   </p>
                 )}
                 <div
-                  className="flex items-center gap-1.5 text-gold font-semibold text-sm"
-                  style={{ marginTop: 'auto' }}
+                  className="flex items-center gap-1.5 font-semibold text-sm"
+                  style={{ marginTop: 'auto', color: 'var(--gold-dark)' }}
                 >
                   Read More
                   <ArrowRight size={14} className="read-more-arrow" style={{ transition: 'transform 0.25s ease' }} />
