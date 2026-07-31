@@ -65,9 +65,9 @@ export default function Testimonials() {
             </>
           )}
 
-          <div className="grid gap-7" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', alignItems: 'start', justifyItems: 'center' }}>
+          <div className="grid gap-7" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', alignItems: 'start' }}>
             {visible.map((t) => (
-              <div key={t.id} className="card p-8" style={{ width: '100%', maxWidth: '400px' }}>
+              <div key={t.id} className="card p-8">
                 <div className="flex items-center justify-between mb-5">
                   <div className="stars">
                     {Array.from({ length: 5 }).map((_, i) => (

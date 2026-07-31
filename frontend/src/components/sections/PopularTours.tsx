@@ -71,8 +71,8 @@ export default function PopularTours() {
           <div
             className="grid gap-7"
             style={{
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 320px))',
-              justifyContent: 'center',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 320px))',
+              justifyContent: 'start',
             }}
           >
             {tours.map((tour) => (
